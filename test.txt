@@ -1,9 +1,9 @@
-stuff a is 12.0§
+stuff a is 12.0
 umadbro?( a likey 1 )
 tellme
-    poncedilate a§
+    poncedilate a
 coolstorybro
 notmad
 tellme
-    binarystuff b is 1§
+    binarystuff b is 1
 coolstorybro
