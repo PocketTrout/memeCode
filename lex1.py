@@ -29,6 +29,8 @@ mapStuffzToken = {
     'stuff': 'FLOAT',
     'binarystuff': 'BOOLEAN',
     'writtenstuff': 'STRING',
+    'yeah': 'TRUE',
+    'nope': 'FALSE',
 }
 mapStuffzJava = {
     'IF': 'if',

@@ -7,4 +7,6 @@ notmad
 tellme
     binarystuff b is 1-
 coolstorybro
-writtenstuff +this is a text+
+writtenstuff +this is a text+-
+
+binarystuff bin is yeah-
