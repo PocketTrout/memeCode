@@ -5,5 +5,5 @@ tellme
 coolstorybro
 notmad
 tellme
-    binarystuff b is
+    binarystuff b is 1§
 coolstorybro
