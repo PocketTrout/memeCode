@@ -25,6 +25,7 @@ mapStuffzToken = {
     'roundedstuff': 'INT',
     'stuff': 'FLOAT',
     'binarystuff': 'BOOLEAN',
+    'writtenstuff': 'STRING',
 }
 mapStuffzJava = {
     'IF': 'if',
@@ -51,11 +52,13 @@ mapStuffzJava = {
     'INT': 'int',
     'FLOAT': 'float',
     'BOOLEAN': 'boolean',
+    'STRING': 'String',
 }
 
 tokens = (
              'NUMBER',
              'IDENTIFIER',
+             'TEXT',
          ) + tuple(mapStuffzToken.values())
 
 literals = '()-'
@@ -74,6 +77,12 @@ def t_IDENTIFIER(t):
     r'[A-Za-z_]\w*'
     if t.value in mapStuffzToken:
         t.type = mapStuffzToken[t.value]
+    return t
+
+def t_TEXT(t):
+    r'[+][^+]+[+]'
+    t.value = str(t.value)[:-1]
+    t.value = str(t.value)[1:]
     return t
 
 
