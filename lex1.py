@@ -1,7 +1,7 @@
 import ply.lex as lex
 
 mapStuffzToken = {
-    'umadbro?': 'IF',
+    'umadbro': 'IF',
     'tellme': 'OPEN_BRACE',
     'coolstorybro': 'CLOSE_BRACE',
     'notmad': 'ELSE',
@@ -58,7 +58,7 @@ tokens = (
              'IDENTIFIER',
          ) + tuple(mapStuffzToken.values())
 
-literals = '()§'
+literals = '()-'
 
 def t_NUMBER(t):
     r'\d+(\.\d+)?'
