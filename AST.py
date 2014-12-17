@@ -128,6 +128,17 @@ class EntryNode(Node):
     type = 'ENTRY'
     def __init__(self):
         Node.__init__(self, None)
+
+class ForNode(Node):
+    type = 'for'
+
+class IfNode(Node):
+    type = 'if'
+
+class TypeNode(Node):
+    type = "type"
+
+
     
 def addToClass(cls):
     ''' Décorateur permettant d'ajouter la fonction décorée en tant que méthode
