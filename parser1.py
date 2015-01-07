@@ -173,6 +173,7 @@ precedence=(
     ('left', 'DIV_OP'),
     ('left', 'SUB_OP'),
     ('right', 'UMINUS'),
+    ('right', 'UPLUS')
 )
 yacc.yacc(outputdir='generated')
 
