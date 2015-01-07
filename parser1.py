@@ -92,7 +92,7 @@ operation = {
 
 def p_expression_sign(p):
     """expression : ADD_OP expression %prec UMINUS
-        | SUB_OP expression """
+        | SUB_OP expression  %prec UPLUS"""
     p[0] = AST.OpNode(p[1],[p[2]])
 
 def p_expression_op(p):
@@ -116,6 +116,7 @@ precedence=(
     ('left', 'DIV_OP'),
     ('left', 'SUB_OP')
     ('right', 'UMINUS'),
+    ('right', 'UPLUS')
 )
 yacc.yacc(outputdir='generated')
 
