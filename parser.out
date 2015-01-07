@@ -1,0 +1,116 @@
+Created by PLY version 3.4 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    MUL_OP
+    TEXT
+    DECR_OP
+    PRINTERR
+    INCR_OP
+    INT
+    TRUE
+    FALSE
+    BREAK
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> statement
+Rule 2     program -> statement - program
+Rule 3     statement -> expression
+Rule 4     statement -> assignation
+Rule 5     statement -> structure
+Rule 6     statement -> PRINT expression
+Rule 7     bloc -> OPEN_BRACE program CLOSE_BRACE
+Rule 8     structure -> whileloop bloc
+Rule 9     structure -> forloop bloc
+Rule 10    structure -> if bloc
+Rule 11    structure -> if bloc ELSE bloc
+Rule 12    forloop -> FOR ( initialization - comparison - expression )
+Rule 13    forloop -> FORNEG ( initialization - NUMBER )
+Rule 14    forloop -> FORNEG ( initialization - IDENTIFIER )
+Rule 15    forloop -> FORPOS ( initialization - NUMBER )
+Rule 16    forloop -> FORPOS ( initialization - IDENTIFIER )
+Rule 17    whileloop -> WHILE ( comparison )
+Rule 18    if -> IF ( comparison )
+Rule 19    comparison_operator -> GREATER_OP
+Rule 20    comparison_operator -> LESSER_OP
+Rule 21    comparison_operator -> EQUALS
+Rule 22    comparison_operator -> GREATER_OR_EQUALS_OP
+Rule 23    comparison_operator -> LESSER_OR_EQUALS_OP
+Rule 24    comparison_operator -> NOT_EQUALS
+Rule 25    comparison -> expression comparison_operator expression
+Rule 26    var_type -> FLOAT
+Rule 27    var_type -> BOOLEAN
+Rule 28    var_type -> STRING
+Rule 29    initialization -> var_type IDENTIFIER AFFECTATION NUMBER
+Rule 30    initialization -> var_type IDENTIFIER AFFECTATION IDENTIFIER
+Rule 31    assignation -> IDENTIFIER = expression
+Rule 32    expression -> NUMBER
+Rule 33    expression -> IDENTIFIER
+Rule 34    expression -> ADD_OP expression
+Rule 35    expression -> SUB_OP expression
+Rule 36    expression -> expression ADD_OP expression
+Rule 37    expression -> expression SUB_OP expression
+Rule 38    expression -> expression MULT_OP expression
+Rule 39    expression -> expression DIV_OP expression
+Rule 40    expression -> ( expression )
+
+Terminals, with rules where they appear
+
+(                    : 12 13 14 15 16 17 18 40
+)                    : 12 13 14 15 16 17 18 40
+-                    : 2 12 12 13 14 15 16
+=                    : 31
+ADD_OP               : 34 36
+AFFECTATION          : 29 30
+BOOLEAN              : 27
+BREAK                : 
+CLOSE_BRACE          : 7
+DECR_OP              : 
+DIV_OP               : 39
+ELSE                 : 11
+EQUALS               : 21
+FALSE                : 
+FLOAT                : 26
+FOR                  : 12
+FORNEG               : 13 14
+FORPOS               : 15 16
+GREATER_OP           : 19
+GREATER_OR_EQUALS_OP : 22
+IDENTIFIER           : 14 16 29 30 30 31 33
+IF                   : 18
+INCR_OP              : 
+INT                  : 
+LESSER_OP            : 20
+LESSER_OR_EQUALS_OP  : 23
+MUL_OP               : 
+NOT_EQUALS           : 24
+NUMBER               : 13 15 29 32
+OPEN_BRACE           : 7
+PRINT                : 6
+PRINTERR             : 
+STRING               : 28
+SUB_OP               : 35 37
+TEXT                 : 
+TRUE                 : 
+WHILE                : 17
+error                : 
+
+Nonterminals, with rules where they appear
+
+MULT_OP              : 38
+assignation          : 4
+bloc                 : 8 9 10 11 11
+comparison           : 12 17 18
+comparison_operator  : 25
+expression           : 3 6 12 25 25 31 34 35 36 36 37 37 38 38 39 39 40
+forloop              : 9
+if                   : 10 11
+initialization       : 12 13 14 15 16
+program              : 2 7 0
+statement            : 1 2
+structure            : 5
+var_type             : 29 30
+whileloop            : 8
+
