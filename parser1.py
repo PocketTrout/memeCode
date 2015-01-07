@@ -31,7 +31,12 @@ def p_structure(p):
         | forloop bloc
         | if bloc
         | if bloc ELSE bloc"""
-    p[0] = TODO
+    try:
+        # if then else
+        p[0] = AST.StructNode([p[2],p[4]])
+    except:
+        # if, for or while
+        p[0] = AST.StructNode([p[2]])
 
 def p_for(p):
     """ forloop : FOR '(' initialization '-' comparison '-' expression ')'
@@ -39,15 +44,23 @@ def p_for(p):
         | FORNEG '(' initialization '-' IDENTIFIER ')'
         | FORPOS '(' initialization '-' NUMBER ')'
         | FORPOS '(' initialization '-' IDENTIFIER ')' """
-    p[0] = TODO
+    try:
+        p[0] = AST.ForNode([p[3], p[5],p[7]])
+    except:
+        #untested
+        p[0] = AST.ForNode([p[3]])
+        if p[1] == 'FORNEG':
+            p[0].fortype = 'forneg'
+        else:
+            p[0].fortype = 'forpos'
 
 def p_while(p):
     """ whileloop : WHILE '(' comparison ')' """
-    p[0] = TODO
+    p[0] = AST.WhileNode([p[3]])
 
 def p_if(p):
-    """ if : '(' comparison ')' """
-    p[0] = TODO
+    """ if : IF '(' comparison ')' """
+    p[0] = AST.IfNode([p[3]])
 
 def p_comparison_operator(p):
     """ comparison_operator : GREATER_OP
@@ -60,7 +73,7 @@ def p_comparison_operator(p):
 
 def p_comparison(p):
     """ comparison : expression comparison_operator expression """
-    p[0] = TODO
+    p[0] = AST.ComparisonNode([p[1], AST.ComparisonTokenNode([p[2]]), p[3]])
 
 def p_var_type(p):
     """ var_type : FLOAT
@@ -92,7 +105,7 @@ operation = {
 
 def p_expression_sign(p):
     """expression : ADD_OP expression %prec UMINUS
-        | SUB_OP expression """
+        | SUB_OP expression %prec UMINUS"""
     p[0] = AST.OpNode(p[1],[p[2]])
 
 def p_expression_op(p):
@@ -114,7 +127,7 @@ precedence=(
     ('left', 'ADD_OP'),
     ('left', 'MUL_OP'),
     ('left', 'DIV_OP'),
-    ('left', 'SUB_OP')
+    ('left', 'SUB_OP'),
     ('right', 'UMINUS'),
 )
 yacc.yacc(outputdir='generated')

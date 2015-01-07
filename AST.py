@@ -129,11 +129,21 @@ class EntryNode(Node):
     def __init__(self):
         Node.__init__(self, None)
 
+class StructNode(Node):
+    type = "struct"
+
 class ForNode(Node):
     type = 'for'
+    fortype = 'for'
 
 class IfNode(Node):
     type = 'if'
+
+class ComparisonNode(Node):
+    type = 'comparison'
+
+class ComparisonTokenNode(Node):
+    type = 'comparisontoken'
 
 class TypeNode(Node):
     type = "type"
