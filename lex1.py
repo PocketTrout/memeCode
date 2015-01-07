@@ -86,8 +86,6 @@ def t_IDENTIFIER(t):
 
 def t_TEXT(t):
     r'[+][^+]+[+]'
-    t.value = str(t.value)[:-1]
-    t.value = str(t.value)[1:]
     return t
 
 

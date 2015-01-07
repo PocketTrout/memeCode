@@ -116,10 +116,13 @@ class OpNode(Node):
         return "%s (%s)" % (self.op, self.nbargs)
     
 class AssignNode(Node):
-    type = '='
+    type = 'equals'
     
 class PrintNode(Node):
     type = 'print'
+
+class PrintErrNode(Node):
+    type = 'printerr'
     
 class WhileNode(Node):
     type = 'while'
@@ -142,14 +145,21 @@ class IfNode(Node):
 class ComparisonNode(Node):
     type = 'comparison'
 
-class ComparisonTokenNode(Node):
+class ComparisonTokenNode(TokenNode):
     type = 'comparisontoken'
 
-class TypeNode(Node):
+class TypeNode(TokenNode):
     type = "type"
 
+class InitNode(Node):
+    type = "init"
 
-    
+class IncrNode(Node):
+    type = "incr"
+
+class BreakNode(Node):
+    type ='break'
+
 def addToClass(cls):
     ''' Décorateur permettant d'ajouter la fonction décorée en tant que méthode
     à une classe.

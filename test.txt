@@ -1,12 +1,34 @@
 stuff a is 12.0-
-umadbro( a likey 1 )
+umadbro ( a likey 2 )
 tellme
-    poncedilate a-
+  a is 132-
 coolstorybro
 notmad
 tellme
-    binarystuff b is 1-
+  a is 12-
 coolstorybro
-writtenstuff +this is a text+-
 
-binarystuff bin is yeah-
+stuff b is 123432-
+
+rammus ( a likey 2 )
+tellme
+	a is a moar 3 -
+coolstorybro
+
+gif(stuff c is 12 - c likey 12 - poncedilate c)
+tellme
+	b is 12 rekts a-
+coolstorybro
+
+gifpos (stuff c is  12- 15)
+tellme
+	b is 12 moar a-
+	kthxbye-
+coolstorybro
+
+writtenstuff asd is +asjdaskljfldkjf+-
+
+omgbbq asd-
+omgbbq +asédkaésldkaésldk+-
+shithappens asd-
+shithappens +asédkaésldkaésldk+-
