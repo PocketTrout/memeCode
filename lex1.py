@@ -57,7 +57,7 @@ mapStuffzJava = {
     'PRINT': 'print',
     'PRINTERR': 'err',
     'INT': 'int',
-    'FLOAT': 'float',
+    'FLOAT': 'double',
     'BOOLEAN': 'boolean',
     'STRING': 'String',
 }

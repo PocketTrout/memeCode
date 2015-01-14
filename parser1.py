@@ -135,7 +135,7 @@ def p_initialization_num(p):
 def p_initialization_string(p):
     """ initialization_string : STRING IDENTIFIER AFFECTATION TEXT """
     p[4] = str(p[4])[1:-1]
-    p[0] = AST.InitNode([AST.TypeNode(mapStuffzToken.get(p[1])), AST.TokenNode(p[2]), AST.TokenNode(p[4])])
+    p[0] = AST.InitNode([AST.TypeNode(mapStuffzToken.get(p[1])), AST.TokenNode(p[2]), AST.TokenNode('"'+p[4]+'"')])
 
 def p_initialization_bool(p):
     """ initialization_bool : BOOLEAN IDENTIFIER AFFECTATION TRUE

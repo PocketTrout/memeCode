@@ -178,119 +178,143 @@ state 0
     (44) initialization_bool -> . BOOLEAN IDENTIFIER AFFECTATION FALSE
     (45) initialization_bool -> . BOOLEAN IDENTIFIER AFFECTATION IDENTIFIER
 
-    PRINT           shift and go to state 35
-    PRINTERR        shift and go to state 31
-    BREAK           shift and go to state 4
-    (               shift and go to state 7
-    IDENTIFIER      shift and go to state 30
-    NUMBER          shift and go to state 28
-    ADD_OP          shift and go to state 19
-    SUB_OP          shift and go to state 25
-    INCR_OP         shift and go to state 14
-    DECR_OP         shift and go to state 21
-    WHILE           shift and go to state 15
-    FOR             shift and go to state 18
-    FORNEG          shift and go to state 27
-    FORPOS          shift and go to state 33
-    IF              shift and go to state 23
-    FLOAT           shift and go to state 16
-    INT             shift and go to state 6
-    STRING          shift and go to state 8
-    BOOLEAN         shift and go to state 20
+    PRINT           shift and go to state 25
+    PRINTERR        shift and go to state 13
+    BREAK           shift and go to state 32
+    (               shift and go to state 31
+    IDENTIFIER      shift and go to state 3
+    NUMBER          shift and go to state 1
+    ADD_OP          shift and go to state 11
+    SUB_OP          shift and go to state 29
+    INCR_OP         shift and go to state 4
+    DECR_OP         shift and go to state 16
+    WHILE           shift and go to state 5
+    FOR             shift and go to state 22
+    FORNEG          shift and go to state 9
+    FORPOS          shift and go to state 24
+    IF              shift and go to state 15
+    FLOAT           shift and go to state 26
+    INT             shift and go to state 23
+    STRING          shift and go to state 10
+    BOOLEAN         shift and go to state 6
 
-    initialization_num             shift and go to state 10
-    whileloop                      shift and go to state 9
-    expression_op                  shift and go to state 22
-    expression                     shift and go to state 12
-    program                        shift and go to state 1
-    expression_incr                shift and go to state 11
-    expression_num                 shift and go to state 2
-    expression_sign                shift and go to state 32
-    assignation                    shift and go to state 3
-    statement                      shift and go to state 13
-    if                             shift and go to state 34
-    forloop                        shift and go to state 17
-    initialization_string          shift and go to state 24
-    initialization_bool            shift and go to state 29
-    structure                      shift and go to state 5
-    initialization                 shift and go to state 26
+    forloop                        shift and go to state 14
+    initialization_string          shift and go to state 27
+    if                             shift and go to state 28
+    expression                     shift and go to state 2
+    assignation                    shift and go to state 17
+    initialization_bool            shift and go to state 12
+    statement                      shift and go to state 18
+    expression_sign                shift and go to state 33
+    expression_num                 shift and go to state 20
+    initialization_num             shift and go to state 21
+    expression_incr                shift and go to state 30
+    program                        shift and go to state 8
+    expression_op                  shift and go to state 19
+    whileloop                      shift and go to state 34
+    structure                      shift and go to state 35
+    initialization                 shift and go to state 7
 
 state 1
+
+    (47) expression_num -> NUMBER .
+
+    ADD_OP          reduce using rule 47 (expression_num -> NUMBER .)
+    SUB_OP          reduce using rule 47 (expression_num -> NUMBER .)
+    MUL_OP          reduce using rule 47 (expression_num -> NUMBER .)
+    DIV_OP          reduce using rule 47 (expression_num -> NUMBER .)
+    -               reduce using rule 47 (expression_num -> NUMBER .)
+    )               reduce using rule 47 (expression_num -> NUMBER .)
+    GREATER_OP      reduce using rule 47 (expression_num -> NUMBER .)
+    LESSER_OP       reduce using rule 47 (expression_num -> NUMBER .)
+    EQUALS          reduce using rule 47 (expression_num -> NUMBER .)
+    GREATER_OR_EQUALS_OP reduce using rule 47 (expression_num -> NUMBER .)
+    LESSER_OR_EQUALS_OP reduce using rule 47 (expression_num -> NUMBER .)
+    NOT_EQUALS      reduce using rule 47 (expression_num -> NUMBER .)
+
+
+state 2
+
+    (7) statement -> expression . -
+    (51) expression_op -> expression . ADD_OP expression
+    (52) expression_op -> expression . SUB_OP expression
+    (53) expression_op -> expression . MUL_OP expression
+    (54) expression_op -> expression . DIV_OP expression
+
+    -               shift and go to state 38
+    ADD_OP          shift and go to state 39
+    SUB_OP          shift and go to state 40
+    MUL_OP          shift and go to state 36
+    DIV_OP          shift and go to state 37
+
+
+state 3
+
+    (46) assignation -> IDENTIFIER . AFFECTATION expression
+    (48) expression_num -> IDENTIFIER .
+
+    AFFECTATION     shift and go to state 41
+    -               reduce using rule 48 (expression_num -> IDENTIFIER .)
+    ADD_OP          reduce using rule 48 (expression_num -> IDENTIFIER .)
+    SUB_OP          reduce using rule 48 (expression_num -> IDENTIFIER .)
+    MUL_OP          reduce using rule 48 (expression_num -> IDENTIFIER .)
+    DIV_OP          reduce using rule 48 (expression_num -> IDENTIFIER .)
+
+
+state 4
+
+    (55) expression_incr -> INCR_OP . IDENTIFIER
+
+    IDENTIFIER      shift and go to state 42
+
+
+state 5
+
+    (26) whileloop -> WHILE . ( comparison )
+
+    (               shift and go to state 43
+
+
+state 6
+
+    (43) initialization_bool -> BOOLEAN . IDENTIFIER AFFECTATION TRUE
+    (44) initialization_bool -> BOOLEAN . IDENTIFIER AFFECTATION FALSE
+    (45) initialization_bool -> BOOLEAN . IDENTIFIER AFFECTATION IDENTIFIER
+
+    IDENTIFIER      shift and go to state 44
+
+
+state 7
+
+    (10) statement -> initialization . -
+
+    -               shift and go to state 45
+
+
+state 8
 
     (0) S' -> program .
 
 
 
-state 2
+state 9
 
-    (3) expression -> expression_num .
+    (22) forloop -> FORNEG . ( initialization - NUMBER )
+    (23) forloop -> FORNEG . ( initialization - IDENTIFIER )
 
-    -               reduce using rule 3 (expression -> expression_num .)
-    ADD_OP          reduce using rule 3 (expression -> expression_num .)
-    SUB_OP          reduce using rule 3 (expression -> expression_num .)
-    MUL_OP          reduce using rule 3 (expression -> expression_num .)
-    DIV_OP          reduce using rule 3 (expression -> expression_num .)
-    )               reduce using rule 3 (expression -> expression_num .)
-    GREATER_OP      reduce using rule 3 (expression -> expression_num .)
-    LESSER_OP       reduce using rule 3 (expression -> expression_num .)
-    EQUALS          reduce using rule 3 (expression -> expression_num .)
-    GREATER_OR_EQUALS_OP reduce using rule 3 (expression -> expression_num .)
-    LESSER_OR_EQUALS_OP reduce using rule 3 (expression -> expression_num .)
-    NOT_EQUALS      reduce using rule 3 (expression -> expression_num .)
+    (               shift and go to state 46
 
 
-state 3
+state 10
 
-    (8) statement -> assignation . -
+    (42) initialization_string -> STRING . IDENTIFIER AFFECTATION TEXT
 
-    -               shift and go to state 36
-
-
-state 4
-
-    (15) statement -> BREAK . -
-
-    -               shift and go to state 37
+    IDENTIFIER      shift and go to state 47
 
 
-state 5
+state 11
 
-    (9) statement -> structure .
-
-    PRINT           reduce using rule 9 (statement -> structure .)
-    PRINTERR        reduce using rule 9 (statement -> structure .)
-    BREAK           reduce using rule 9 (statement -> structure .)
-    (               reduce using rule 9 (statement -> structure .)
-    IDENTIFIER      reduce using rule 9 (statement -> structure .)
-    NUMBER          reduce using rule 9 (statement -> structure .)
-    ADD_OP          reduce using rule 9 (statement -> structure .)
-    SUB_OP          reduce using rule 9 (statement -> structure .)
-    INCR_OP         reduce using rule 9 (statement -> structure .)
-    DECR_OP         reduce using rule 9 (statement -> structure .)
-    WHILE           reduce using rule 9 (statement -> structure .)
-    FOR             reduce using rule 9 (statement -> structure .)
-    FORNEG          reduce using rule 9 (statement -> structure .)
-    FORPOS          reduce using rule 9 (statement -> structure .)
-    IF              reduce using rule 9 (statement -> structure .)
-    FLOAT           reduce using rule 9 (statement -> structure .)
-    INT             reduce using rule 9 (statement -> structure .)
-    STRING          reduce using rule 9 (statement -> structure .)
-    BOOLEAN         reduce using rule 9 (statement -> structure .)
-    $end            reduce using rule 9 (statement -> structure .)
-    CLOSE_BRACE     reduce using rule 9 (statement -> structure .)
-
-
-state 6
-
-    (40) initialization_num -> INT . IDENTIFIER AFFECTATION NUMBER
-    (41) initialization_num -> INT . IDENTIFIER AFFECTATION IDENTIFIER
-
-    IDENTIFIER      shift and go to state 38
-
-
-state 7
-
-    (57) expression -> ( . expression )
+    (49) expression_sign -> ADD_OP . expression
     (3) expression -> . expression_num
     (4) expression -> . expression_sign
     (5) expression -> . expression_op
@@ -307,77 +331,67 @@ state 7
     (55) expression_incr -> . INCR_OP IDENTIFIER
     (56) expression_incr -> . DECR_OP IDENTIFIER
 
-    (               shift and go to state 7
-    NUMBER          shift and go to state 28
-    IDENTIFIER      shift and go to state 39
-    ADD_OP          shift and go to state 19
-    SUB_OP          shift and go to state 25
-    INCR_OP         shift and go to state 14
-    DECR_OP         shift and go to state 21
+    (               shift and go to state 31
+    NUMBER          shift and go to state 1
+    IDENTIFIER      shift and go to state 49
+    ADD_OP          shift and go to state 11
+    SUB_OP          shift and go to state 29
+    INCR_OP         shift and go to state 4
+    DECR_OP         shift and go to state 16
 
-    expression                     shift and go to state 40
-    expression_op                  shift and go to state 22
-    expression_incr                shift and go to state 11
-    expression_num                 shift and go to state 2
-    expression_sign                shift and go to state 32
-
-state 8
-
-    (42) initialization_string -> STRING . IDENTIFIER AFFECTATION TEXT
-
-    IDENTIFIER      shift and go to state 41
-
-
-state 9
-
-    (17) structure -> whileloop . bloc
-    (16) bloc -> . OPEN_BRACE program CLOSE_BRACE
-
-    OPEN_BRACE      shift and go to state 43
-
-    bloc                           shift and go to state 42
-
-state 10
-
-    (35) initialization -> initialization_num .
-
-    -               reduce using rule 35 (initialization -> initialization_num .)
-
-
-state 11
-
-    (6) expression -> expression_incr .
-
-    -               reduce using rule 6 (expression -> expression_incr .)
-    ADD_OP          reduce using rule 6 (expression -> expression_incr .)
-    SUB_OP          reduce using rule 6 (expression -> expression_incr .)
-    MUL_OP          reduce using rule 6 (expression -> expression_incr .)
-    DIV_OP          reduce using rule 6 (expression -> expression_incr .)
-    )               reduce using rule 6 (expression -> expression_incr .)
-    GREATER_OP      reduce using rule 6 (expression -> expression_incr .)
-    LESSER_OP       reduce using rule 6 (expression -> expression_incr .)
-    EQUALS          reduce using rule 6 (expression -> expression_incr .)
-    GREATER_OR_EQUALS_OP reduce using rule 6 (expression -> expression_incr .)
-    LESSER_OR_EQUALS_OP reduce using rule 6 (expression -> expression_incr .)
-    NOT_EQUALS      reduce using rule 6 (expression -> expression_incr .)
-
+    expression_sign                shift and go to state 33
+    expression_op                  shift and go to state 19
+    expression_num                 shift and go to state 20
+    expression                     shift and go to state 48
+    expression_incr                shift and go to state 30
 
 state 12
 
-    (7) statement -> expression . -
-    (51) expression_op -> expression . ADD_OP expression
-    (52) expression_op -> expression . SUB_OP expression
-    (53) expression_op -> expression . MUL_OP expression
-    (54) expression_op -> expression . DIV_OP expression
+    (37) initialization -> initialization_bool .
 
-    -               shift and go to state 44
-    ADD_OP          shift and go to state 47
-    SUB_OP          shift and go to state 46
-    MUL_OP          shift and go to state 48
-    DIV_OP          shift and go to state 45
+    -               reduce using rule 37 (initialization -> initialization_bool .)
 
 
 state 13
+
+    (13) statement -> PRINTERR . TEXT -
+    (14) statement -> PRINTERR . IDENTIFIER -
+
+    TEXT            shift and go to state 51
+    IDENTIFIER      shift and go to state 50
+
+
+state 14
+
+    (18) structure -> forloop . bloc
+    (16) bloc -> . OPEN_BRACE program CLOSE_BRACE
+
+    OPEN_BRACE      shift and go to state 52
+
+    bloc                           shift and go to state 53
+
+state 15
+
+    (27) if -> IF . ( comparison )
+
+    (               shift and go to state 54
+
+
+state 16
+
+    (56) expression_incr -> DECR_OP . IDENTIFIER
+
+    IDENTIFIER      shift and go to state 55
+
+
+state 17
+
+    (8) statement -> assignation . -
+
+    -               shift and go to state 56
+
+
+state 18
 
     (1) program -> statement .
     (2) program -> statement . program
@@ -431,133 +445,46 @@ state 13
     (44) initialization_bool -> . BOOLEAN IDENTIFIER AFFECTATION FALSE
     (45) initialization_bool -> . BOOLEAN IDENTIFIER AFFECTATION IDENTIFIER
 
-    CLOSE_BRACE     reduce using rule 1 (program -> statement .)
     $end            reduce using rule 1 (program -> statement .)
-    PRINT           shift and go to state 35
-    PRINTERR        shift and go to state 31
-    BREAK           shift and go to state 4
-    (               shift and go to state 7
-    IDENTIFIER      shift and go to state 30
-    NUMBER          shift and go to state 28
-    ADD_OP          shift and go to state 19
-    SUB_OP          shift and go to state 25
-    INCR_OP         shift and go to state 14
-    DECR_OP         shift and go to state 21
-    WHILE           shift and go to state 15
-    FOR             shift and go to state 18
-    FORNEG          shift and go to state 27
-    FORPOS          shift and go to state 33
-    IF              shift and go to state 23
-    FLOAT           shift and go to state 16
-    INT             shift and go to state 6
-    STRING          shift and go to state 8
-    BOOLEAN         shift and go to state 20
+    CLOSE_BRACE     reduce using rule 1 (program -> statement .)
+    PRINT           shift and go to state 25
+    PRINTERR        shift and go to state 13
+    BREAK           shift and go to state 32
+    (               shift and go to state 31
+    IDENTIFIER      shift and go to state 3
+    NUMBER          shift and go to state 1
+    ADD_OP          shift and go to state 11
+    SUB_OP          shift and go to state 29
+    INCR_OP         shift and go to state 4
+    DECR_OP         shift and go to state 16
+    WHILE           shift and go to state 5
+    FOR             shift and go to state 22
+    FORNEG          shift and go to state 9
+    FORPOS          shift and go to state 24
+    IF              shift and go to state 15
+    FLOAT           shift and go to state 26
+    INT             shift and go to state 23
+    STRING          shift and go to state 10
+    BOOLEAN         shift and go to state 6
 
-    initialization_num             shift and go to state 10
-    whileloop                      shift and go to state 9
-    expression_op                  shift and go to state 22
-    expression                     shift and go to state 12
-    program                        shift and go to state 49
-    expression_incr                shift and go to state 11
-    expression_num                 shift and go to state 2
-    expression_sign                shift and go to state 32
-    assignation                    shift and go to state 3
-    statement                      shift and go to state 13
-    if                             shift and go to state 34
-    forloop                        shift and go to state 17
-    initialization_string          shift and go to state 24
-    initialization_bool            shift and go to state 29
-    structure                      shift and go to state 5
-    initialization                 shift and go to state 26
-
-state 14
-
-    (55) expression_incr -> INCR_OP . IDENTIFIER
-
-    IDENTIFIER      shift and go to state 50
-
-
-state 15
-
-    (26) whileloop -> WHILE . ( comparison )
-
-    (               shift and go to state 51
-
-
-state 16
-
-    (38) initialization_num -> FLOAT . IDENTIFIER AFFECTATION NUMBER
-    (39) initialization_num -> FLOAT . IDENTIFIER AFFECTATION IDENTIFIER
-
-    IDENTIFIER      shift and go to state 52
-
-
-state 17
-
-    (18) structure -> forloop . bloc
-    (16) bloc -> . OPEN_BRACE program CLOSE_BRACE
-
-    OPEN_BRACE      shift and go to state 43
-
-    bloc                           shift and go to state 53
-
-state 18
-
-    (21) forloop -> FOR . ( initialization - comparison - expression )
-
-    (               shift and go to state 54
-
+    forloop                        shift and go to state 14
+    initialization_string          shift and go to state 27
+    if                             shift and go to state 28
+    expression                     shift and go to state 2
+    assignation                    shift and go to state 17
+    initialization_bool            shift and go to state 12
+    statement                      shift and go to state 18
+    expression_sign                shift and go to state 33
+    expression_num                 shift and go to state 20
+    initialization_num             shift and go to state 21
+    expression_incr                shift and go to state 30
+    program                        shift and go to state 57
+    expression_op                  shift and go to state 19
+    whileloop                      shift and go to state 34
+    structure                      shift and go to state 35
+    initialization                 shift and go to state 7
 
 state 19
-
-    (49) expression_sign -> ADD_OP . expression
-    (3) expression -> . expression_num
-    (4) expression -> . expression_sign
-    (5) expression -> . expression_op
-    (6) expression -> . expression_incr
-    (57) expression -> . ( expression )
-    (47) expression_num -> . NUMBER
-    (48) expression_num -> . IDENTIFIER
-    (49) expression_sign -> . ADD_OP expression
-    (50) expression_sign -> . SUB_OP expression
-    (51) expression_op -> . expression ADD_OP expression
-    (52) expression_op -> . expression SUB_OP expression
-    (53) expression_op -> . expression MUL_OP expression
-    (54) expression_op -> . expression DIV_OP expression
-    (55) expression_incr -> . INCR_OP IDENTIFIER
-    (56) expression_incr -> . DECR_OP IDENTIFIER
-
-    (               shift and go to state 7
-    NUMBER          shift and go to state 28
-    IDENTIFIER      shift and go to state 39
-    ADD_OP          shift and go to state 19
-    SUB_OP          shift and go to state 25
-    INCR_OP         shift and go to state 14
-    DECR_OP         shift and go to state 21
-
-    expression                     shift and go to state 55
-    expression_op                  shift and go to state 22
-    expression_incr                shift and go to state 11
-    expression_num                 shift and go to state 2
-    expression_sign                shift and go to state 32
-
-state 20
-
-    (43) initialization_bool -> BOOLEAN . IDENTIFIER AFFECTATION TRUE
-    (44) initialization_bool -> BOOLEAN . IDENTIFIER AFFECTATION FALSE
-    (45) initialization_bool -> BOOLEAN . IDENTIFIER AFFECTATION IDENTIFIER
-
-    IDENTIFIER      shift and go to state 56
-
-
-state 21
-
-    (56) expression_incr -> DECR_OP . IDENTIFIER
-
-    IDENTIFIER      shift and go to state 57
-
-
-state 22
 
     (5) expression -> expression_op .
 
@@ -575,21 +502,89 @@ state 22
     NOT_EQUALS      reduce using rule 5 (expression -> expression_op .)
 
 
-state 23
+state 20
 
-    (27) if -> IF . ( comparison )
+    (3) expression -> expression_num .
+
+    -               reduce using rule 3 (expression -> expression_num .)
+    ADD_OP          reduce using rule 3 (expression -> expression_num .)
+    SUB_OP          reduce using rule 3 (expression -> expression_num .)
+    MUL_OP          reduce using rule 3 (expression -> expression_num .)
+    DIV_OP          reduce using rule 3 (expression -> expression_num .)
+    )               reduce using rule 3 (expression -> expression_num .)
+    GREATER_OP      reduce using rule 3 (expression -> expression_num .)
+    LESSER_OP       reduce using rule 3 (expression -> expression_num .)
+    EQUALS          reduce using rule 3 (expression -> expression_num .)
+    GREATER_OR_EQUALS_OP reduce using rule 3 (expression -> expression_num .)
+    LESSER_OR_EQUALS_OP reduce using rule 3 (expression -> expression_num .)
+    NOT_EQUALS      reduce using rule 3 (expression -> expression_num .)
+
+
+state 21
+
+    (35) initialization -> initialization_num .
+
+    -               reduce using rule 35 (initialization -> initialization_num .)
+
+
+state 22
+
+    (21) forloop -> FOR . ( initialization - comparison - expression )
 
     (               shift and go to state 58
 
 
+state 23
+
+    (40) initialization_num -> INT . IDENTIFIER AFFECTATION NUMBER
+    (41) initialization_num -> INT . IDENTIFIER AFFECTATION IDENTIFIER
+
+    IDENTIFIER      shift and go to state 59
+
+
 state 24
+
+    (24) forloop -> FORPOS . ( initialization - NUMBER )
+    (25) forloop -> FORPOS . ( initialization - IDENTIFIER )
+
+    (               shift and go to state 60
+
+
+state 25
+
+    (11) statement -> PRINT . TEXT -
+    (12) statement -> PRINT . IDENTIFIER -
+
+    TEXT            shift and go to state 62
+    IDENTIFIER      shift and go to state 61
+
+
+state 26
+
+    (38) initialization_num -> FLOAT . IDENTIFIER AFFECTATION NUMBER
+    (39) initialization_num -> FLOAT . IDENTIFIER AFFECTATION IDENTIFIER
+
+    IDENTIFIER      shift and go to state 63
+
+
+state 27
 
     (36) initialization -> initialization_string .
 
     -               reduce using rule 36 (initialization -> initialization_string .)
 
 
-state 25
+state 28
+
+    (19) structure -> if . bloc
+    (20) structure -> if . bloc ELSE bloc
+    (16) bloc -> . OPEN_BRACE program CLOSE_BRACE
+
+    OPEN_BRACE      shift and go to state 52
+
+    bloc                           shift and go to state 64
+
+state 29
 
     (50) expression_sign -> SUB_OP . expression
     (3) expression -> . expression_num
@@ -608,83 +603,79 @@ state 25
     (55) expression_incr -> . INCR_OP IDENTIFIER
     (56) expression_incr -> . DECR_OP IDENTIFIER
 
-    (               shift and go to state 7
-    NUMBER          shift and go to state 28
-    IDENTIFIER      shift and go to state 39
-    ADD_OP          shift and go to state 19
-    SUB_OP          shift and go to state 25
-    INCR_OP         shift and go to state 14
-    DECR_OP         shift and go to state 21
+    (               shift and go to state 31
+    NUMBER          shift and go to state 1
+    IDENTIFIER      shift and go to state 49
+    ADD_OP          shift and go to state 11
+    SUB_OP          shift and go to state 29
+    INCR_OP         shift and go to state 4
+    DECR_OP         shift and go to state 16
 
-    expression                     shift and go to state 59
-    expression_op                  shift and go to state 22
-    expression_incr                shift and go to state 11
-    expression_num                 shift and go to state 2
-    expression_sign                shift and go to state 32
-
-state 26
-
-    (10) statement -> initialization . -
-
-    -               shift and go to state 60
-
-
-state 27
-
-    (22) forloop -> FORNEG . ( initialization - NUMBER )
-    (23) forloop -> FORNEG . ( initialization - IDENTIFIER )
-
-    (               shift and go to state 61
-
-
-state 28
-
-    (47) expression_num -> NUMBER .
-
-    ADD_OP          reduce using rule 47 (expression_num -> NUMBER .)
-    SUB_OP          reduce using rule 47 (expression_num -> NUMBER .)
-    MUL_OP          reduce using rule 47 (expression_num -> NUMBER .)
-    DIV_OP          reduce using rule 47 (expression_num -> NUMBER .)
-    -               reduce using rule 47 (expression_num -> NUMBER .)
-    )               reduce using rule 47 (expression_num -> NUMBER .)
-    GREATER_OP      reduce using rule 47 (expression_num -> NUMBER .)
-    LESSER_OP       reduce using rule 47 (expression_num -> NUMBER .)
-    EQUALS          reduce using rule 47 (expression_num -> NUMBER .)
-    GREATER_OR_EQUALS_OP reduce using rule 47 (expression_num -> NUMBER .)
-    LESSER_OR_EQUALS_OP reduce using rule 47 (expression_num -> NUMBER .)
-    NOT_EQUALS      reduce using rule 47 (expression_num -> NUMBER .)
-
-
-state 29
-
-    (37) initialization -> initialization_bool .
-
-    -               reduce using rule 37 (initialization -> initialization_bool .)
-
+    expression_sign                shift and go to state 33
+    expression_op                  shift and go to state 19
+    expression_num                 shift and go to state 20
+    expression                     shift and go to state 65
+    expression_incr                shift and go to state 30
 
 state 30
 
-    (46) assignation -> IDENTIFIER . AFFECTATION expression
-    (48) expression_num -> IDENTIFIER .
+    (6) expression -> expression_incr .
 
-    AFFECTATION     shift and go to state 62
-    -               reduce using rule 48 (expression_num -> IDENTIFIER .)
-    ADD_OP          reduce using rule 48 (expression_num -> IDENTIFIER .)
-    SUB_OP          reduce using rule 48 (expression_num -> IDENTIFIER .)
-    MUL_OP          reduce using rule 48 (expression_num -> IDENTIFIER .)
-    DIV_OP          reduce using rule 48 (expression_num -> IDENTIFIER .)
+    -               reduce using rule 6 (expression -> expression_incr .)
+    ADD_OP          reduce using rule 6 (expression -> expression_incr .)
+    SUB_OP          reduce using rule 6 (expression -> expression_incr .)
+    MUL_OP          reduce using rule 6 (expression -> expression_incr .)
+    DIV_OP          reduce using rule 6 (expression -> expression_incr .)
+    )               reduce using rule 6 (expression -> expression_incr .)
+    GREATER_OP      reduce using rule 6 (expression -> expression_incr .)
+    LESSER_OP       reduce using rule 6 (expression -> expression_incr .)
+    EQUALS          reduce using rule 6 (expression -> expression_incr .)
+    GREATER_OR_EQUALS_OP reduce using rule 6 (expression -> expression_incr .)
+    LESSER_OR_EQUALS_OP reduce using rule 6 (expression -> expression_incr .)
+    NOT_EQUALS      reduce using rule 6 (expression -> expression_incr .)
 
 
 state 31
 
-    (13) statement -> PRINTERR . TEXT -
-    (14) statement -> PRINTERR . IDENTIFIER -
+    (57) expression -> ( . expression )
+    (3) expression -> . expression_num
+    (4) expression -> . expression_sign
+    (5) expression -> . expression_op
+    (6) expression -> . expression_incr
+    (57) expression -> . ( expression )
+    (47) expression_num -> . NUMBER
+    (48) expression_num -> . IDENTIFIER
+    (49) expression_sign -> . ADD_OP expression
+    (50) expression_sign -> . SUB_OP expression
+    (51) expression_op -> . expression ADD_OP expression
+    (52) expression_op -> . expression SUB_OP expression
+    (53) expression_op -> . expression MUL_OP expression
+    (54) expression_op -> . expression DIV_OP expression
+    (55) expression_incr -> . INCR_OP IDENTIFIER
+    (56) expression_incr -> . DECR_OP IDENTIFIER
 
-    TEXT            shift and go to state 63
-    IDENTIFIER      shift and go to state 64
+    (               shift and go to state 31
+    NUMBER          shift and go to state 1
+    IDENTIFIER      shift and go to state 49
+    ADD_OP          shift and go to state 11
+    SUB_OP          shift and go to state 29
+    INCR_OP         shift and go to state 4
+    DECR_OP         shift and go to state 16
 
+    expression_sign                shift and go to state 33
+    expression_op                  shift and go to state 19
+    expression_num                 shift and go to state 20
+    expression                     shift and go to state 66
+    expression_incr                shift and go to state 30
 
 state 32
+
+    (15) statement -> BREAK . -
+
+    -               shift and go to state 67
+
+
+state 33
 
     (4) expression -> expression_sign .
 
@@ -702,96 +693,384 @@ state 32
     NOT_EQUALS      reduce using rule 4 (expression -> expression_sign .)
 
 
-state 33
-
-    (24) forloop -> FORPOS . ( initialization - NUMBER )
-    (25) forloop -> FORPOS . ( initialization - IDENTIFIER )
-
-    (               shift and go to state 65
-
-
 state 34
 
-    (19) structure -> if . bloc
-    (20) structure -> if . bloc ELSE bloc
+    (17) structure -> whileloop . bloc
     (16) bloc -> . OPEN_BRACE program CLOSE_BRACE
 
-    OPEN_BRACE      shift and go to state 43
+    OPEN_BRACE      shift and go to state 52
 
-    bloc                           shift and go to state 66
+    bloc                           shift and go to state 68
 
 state 35
 
-    (11) statement -> PRINT . TEXT -
-    (12) statement -> PRINT . IDENTIFIER -
+    (9) statement -> structure .
 
-    TEXT            shift and go to state 67
-    IDENTIFIER      shift and go to state 68
+    PRINT           reduce using rule 9 (statement -> structure .)
+    PRINTERR        reduce using rule 9 (statement -> structure .)
+    BREAK           reduce using rule 9 (statement -> structure .)
+    (               reduce using rule 9 (statement -> structure .)
+    IDENTIFIER      reduce using rule 9 (statement -> structure .)
+    NUMBER          reduce using rule 9 (statement -> structure .)
+    ADD_OP          reduce using rule 9 (statement -> structure .)
+    SUB_OP          reduce using rule 9 (statement -> structure .)
+    INCR_OP         reduce using rule 9 (statement -> structure .)
+    DECR_OP         reduce using rule 9 (statement -> structure .)
+    WHILE           reduce using rule 9 (statement -> structure .)
+    FOR             reduce using rule 9 (statement -> structure .)
+    FORNEG          reduce using rule 9 (statement -> structure .)
+    FORPOS          reduce using rule 9 (statement -> structure .)
+    IF              reduce using rule 9 (statement -> structure .)
+    FLOAT           reduce using rule 9 (statement -> structure .)
+    INT             reduce using rule 9 (statement -> structure .)
+    STRING          reduce using rule 9 (statement -> structure .)
+    BOOLEAN         reduce using rule 9 (statement -> structure .)
+    $end            reduce using rule 9 (statement -> structure .)
+    CLOSE_BRACE     reduce using rule 9 (statement -> structure .)
 
 
 state 36
 
-    (8) statement -> assignation - .
+    (53) expression_op -> expression MUL_OP . expression
+    (3) expression -> . expression_num
+    (4) expression -> . expression_sign
+    (5) expression -> . expression_op
+    (6) expression -> . expression_incr
+    (57) expression -> . ( expression )
+    (47) expression_num -> . NUMBER
+    (48) expression_num -> . IDENTIFIER
+    (49) expression_sign -> . ADD_OP expression
+    (50) expression_sign -> . SUB_OP expression
+    (51) expression_op -> . expression ADD_OP expression
+    (52) expression_op -> . expression SUB_OP expression
+    (53) expression_op -> . expression MUL_OP expression
+    (54) expression_op -> . expression DIV_OP expression
+    (55) expression_incr -> . INCR_OP IDENTIFIER
+    (56) expression_incr -> . DECR_OP IDENTIFIER
 
-    PRINT           reduce using rule 8 (statement -> assignation - .)
-    PRINTERR        reduce using rule 8 (statement -> assignation - .)
-    BREAK           reduce using rule 8 (statement -> assignation - .)
-    (               reduce using rule 8 (statement -> assignation - .)
-    IDENTIFIER      reduce using rule 8 (statement -> assignation - .)
-    NUMBER          reduce using rule 8 (statement -> assignation - .)
-    ADD_OP          reduce using rule 8 (statement -> assignation - .)
-    SUB_OP          reduce using rule 8 (statement -> assignation - .)
-    INCR_OP         reduce using rule 8 (statement -> assignation - .)
-    DECR_OP         reduce using rule 8 (statement -> assignation - .)
-    WHILE           reduce using rule 8 (statement -> assignation - .)
-    FOR             reduce using rule 8 (statement -> assignation - .)
-    FORNEG          reduce using rule 8 (statement -> assignation - .)
-    FORPOS          reduce using rule 8 (statement -> assignation - .)
-    IF              reduce using rule 8 (statement -> assignation - .)
-    FLOAT           reduce using rule 8 (statement -> assignation - .)
-    INT             reduce using rule 8 (statement -> assignation - .)
-    STRING          reduce using rule 8 (statement -> assignation - .)
-    BOOLEAN         reduce using rule 8 (statement -> assignation - .)
-    $end            reduce using rule 8 (statement -> assignation - .)
-    CLOSE_BRACE     reduce using rule 8 (statement -> assignation - .)
+    (               shift and go to state 31
+    NUMBER          shift and go to state 1
+    IDENTIFIER      shift and go to state 49
+    ADD_OP          shift and go to state 11
+    SUB_OP          shift and go to state 29
+    INCR_OP         shift and go to state 4
+    DECR_OP         shift and go to state 16
 
+    expression_sign                shift and go to state 33
+    expression_op                  shift and go to state 19
+    expression_num                 shift and go to state 20
+    expression                     shift and go to state 69
+    expression_incr                shift and go to state 30
 
 state 37
 
-    (15) statement -> BREAK - .
+    (54) expression_op -> expression DIV_OP . expression
+    (3) expression -> . expression_num
+    (4) expression -> . expression_sign
+    (5) expression -> . expression_op
+    (6) expression -> . expression_incr
+    (57) expression -> . ( expression )
+    (47) expression_num -> . NUMBER
+    (48) expression_num -> . IDENTIFIER
+    (49) expression_sign -> . ADD_OP expression
+    (50) expression_sign -> . SUB_OP expression
+    (51) expression_op -> . expression ADD_OP expression
+    (52) expression_op -> . expression SUB_OP expression
+    (53) expression_op -> . expression MUL_OP expression
+    (54) expression_op -> . expression DIV_OP expression
+    (55) expression_incr -> . INCR_OP IDENTIFIER
+    (56) expression_incr -> . DECR_OP IDENTIFIER
 
-    PRINT           reduce using rule 15 (statement -> BREAK - .)
-    PRINTERR        reduce using rule 15 (statement -> BREAK - .)
-    BREAK           reduce using rule 15 (statement -> BREAK - .)
-    (               reduce using rule 15 (statement -> BREAK - .)
-    IDENTIFIER      reduce using rule 15 (statement -> BREAK - .)
-    NUMBER          reduce using rule 15 (statement -> BREAK - .)
-    ADD_OP          reduce using rule 15 (statement -> BREAK - .)
-    SUB_OP          reduce using rule 15 (statement -> BREAK - .)
-    INCR_OP         reduce using rule 15 (statement -> BREAK - .)
-    DECR_OP         reduce using rule 15 (statement -> BREAK - .)
-    WHILE           reduce using rule 15 (statement -> BREAK - .)
-    FOR             reduce using rule 15 (statement -> BREAK - .)
-    FORNEG          reduce using rule 15 (statement -> BREAK - .)
-    FORPOS          reduce using rule 15 (statement -> BREAK - .)
-    IF              reduce using rule 15 (statement -> BREAK - .)
-    FLOAT           reduce using rule 15 (statement -> BREAK - .)
-    INT             reduce using rule 15 (statement -> BREAK - .)
-    STRING          reduce using rule 15 (statement -> BREAK - .)
-    BOOLEAN         reduce using rule 15 (statement -> BREAK - .)
-    $end            reduce using rule 15 (statement -> BREAK - .)
-    CLOSE_BRACE     reduce using rule 15 (statement -> BREAK - .)
+    (               shift and go to state 31
+    NUMBER          shift and go to state 1
+    IDENTIFIER      shift and go to state 49
+    ADD_OP          shift and go to state 11
+    SUB_OP          shift and go to state 29
+    INCR_OP         shift and go to state 4
+    DECR_OP         shift and go to state 16
 
+    expression_sign                shift and go to state 33
+    expression_op                  shift and go to state 19
+    expression_num                 shift and go to state 20
+    expression                     shift and go to state 70
+    expression_incr                shift and go to state 30
 
 state 38
 
-    (40) initialization_num -> INT IDENTIFIER . AFFECTATION NUMBER
-    (41) initialization_num -> INT IDENTIFIER . AFFECTATION IDENTIFIER
+    (7) statement -> expression - .
 
-    AFFECTATION     shift and go to state 69
+    PRINT           reduce using rule 7 (statement -> expression - .)
+    PRINTERR        reduce using rule 7 (statement -> expression - .)
+    BREAK           reduce using rule 7 (statement -> expression - .)
+    (               reduce using rule 7 (statement -> expression - .)
+    IDENTIFIER      reduce using rule 7 (statement -> expression - .)
+    NUMBER          reduce using rule 7 (statement -> expression - .)
+    ADD_OP          reduce using rule 7 (statement -> expression - .)
+    SUB_OP          reduce using rule 7 (statement -> expression - .)
+    INCR_OP         reduce using rule 7 (statement -> expression - .)
+    DECR_OP         reduce using rule 7 (statement -> expression - .)
+    WHILE           reduce using rule 7 (statement -> expression - .)
+    FOR             reduce using rule 7 (statement -> expression - .)
+    FORNEG          reduce using rule 7 (statement -> expression - .)
+    FORPOS          reduce using rule 7 (statement -> expression - .)
+    IF              reduce using rule 7 (statement -> expression - .)
+    FLOAT           reduce using rule 7 (statement -> expression - .)
+    INT             reduce using rule 7 (statement -> expression - .)
+    STRING          reduce using rule 7 (statement -> expression - .)
+    BOOLEAN         reduce using rule 7 (statement -> expression - .)
+    $end            reduce using rule 7 (statement -> expression - .)
+    CLOSE_BRACE     reduce using rule 7 (statement -> expression - .)
 
 
 state 39
+
+    (51) expression_op -> expression ADD_OP . expression
+    (3) expression -> . expression_num
+    (4) expression -> . expression_sign
+    (5) expression -> . expression_op
+    (6) expression -> . expression_incr
+    (57) expression -> . ( expression )
+    (47) expression_num -> . NUMBER
+    (48) expression_num -> . IDENTIFIER
+    (49) expression_sign -> . ADD_OP expression
+    (50) expression_sign -> . SUB_OP expression
+    (51) expression_op -> . expression ADD_OP expression
+    (52) expression_op -> . expression SUB_OP expression
+    (53) expression_op -> . expression MUL_OP expression
+    (54) expression_op -> . expression DIV_OP expression
+    (55) expression_incr -> . INCR_OP IDENTIFIER
+    (56) expression_incr -> . DECR_OP IDENTIFIER
+
+    (               shift and go to state 31
+    NUMBER          shift and go to state 1
+    IDENTIFIER      shift and go to state 49
+    ADD_OP          shift and go to state 11
+    SUB_OP          shift and go to state 29
+    INCR_OP         shift and go to state 4
+    DECR_OP         shift and go to state 16
+
+    expression_sign                shift and go to state 33
+    expression_op                  shift and go to state 19
+    expression_num                 shift and go to state 20
+    expression                     shift and go to state 71
+    expression_incr                shift and go to state 30
+
+state 40
+
+    (52) expression_op -> expression SUB_OP . expression
+    (3) expression -> . expression_num
+    (4) expression -> . expression_sign
+    (5) expression -> . expression_op
+    (6) expression -> . expression_incr
+    (57) expression -> . ( expression )
+    (47) expression_num -> . NUMBER
+    (48) expression_num -> . IDENTIFIER
+    (49) expression_sign -> . ADD_OP expression
+    (50) expression_sign -> . SUB_OP expression
+    (51) expression_op -> . expression ADD_OP expression
+    (52) expression_op -> . expression SUB_OP expression
+    (53) expression_op -> . expression MUL_OP expression
+    (54) expression_op -> . expression DIV_OP expression
+    (55) expression_incr -> . INCR_OP IDENTIFIER
+    (56) expression_incr -> . DECR_OP IDENTIFIER
+
+    (               shift and go to state 31
+    NUMBER          shift and go to state 1
+    IDENTIFIER      shift and go to state 49
+    ADD_OP          shift and go to state 11
+    SUB_OP          shift and go to state 29
+    INCR_OP         shift and go to state 4
+    DECR_OP         shift and go to state 16
+
+    expression_sign                shift and go to state 33
+    expression_op                  shift and go to state 19
+    expression_num                 shift and go to state 20
+    expression                     shift and go to state 72
+    expression_incr                shift and go to state 30
+
+state 41
+
+    (46) assignation -> IDENTIFIER AFFECTATION . expression
+    (3) expression -> . expression_num
+    (4) expression -> . expression_sign
+    (5) expression -> . expression_op
+    (6) expression -> . expression_incr
+    (57) expression -> . ( expression )
+    (47) expression_num -> . NUMBER
+    (48) expression_num -> . IDENTIFIER
+    (49) expression_sign -> . ADD_OP expression
+    (50) expression_sign -> . SUB_OP expression
+    (51) expression_op -> . expression ADD_OP expression
+    (52) expression_op -> . expression SUB_OP expression
+    (53) expression_op -> . expression MUL_OP expression
+    (54) expression_op -> . expression DIV_OP expression
+    (55) expression_incr -> . INCR_OP IDENTIFIER
+    (56) expression_incr -> . DECR_OP IDENTIFIER
+
+    (               shift and go to state 31
+    NUMBER          shift and go to state 1
+    IDENTIFIER      shift and go to state 49
+    ADD_OP          shift and go to state 11
+    SUB_OP          shift and go to state 29
+    INCR_OP         shift and go to state 4
+    DECR_OP         shift and go to state 16
+
+    expression_sign                shift and go to state 33
+    expression_op                  shift and go to state 19
+    expression_num                 shift and go to state 20
+    expression                     shift and go to state 73
+    expression_incr                shift and go to state 30
+
+state 42
+
+    (55) expression_incr -> INCR_OP IDENTIFIER .
+
+    ADD_OP          reduce using rule 55 (expression_incr -> INCR_OP IDENTIFIER .)
+    SUB_OP          reduce using rule 55 (expression_incr -> INCR_OP IDENTIFIER .)
+    MUL_OP          reduce using rule 55 (expression_incr -> INCR_OP IDENTIFIER .)
+    DIV_OP          reduce using rule 55 (expression_incr -> INCR_OP IDENTIFIER .)
+    -               reduce using rule 55 (expression_incr -> INCR_OP IDENTIFIER .)
+    )               reduce using rule 55 (expression_incr -> INCR_OP IDENTIFIER .)
+    GREATER_OP      reduce using rule 55 (expression_incr -> INCR_OP IDENTIFIER .)
+    LESSER_OP       reduce using rule 55 (expression_incr -> INCR_OP IDENTIFIER .)
+    EQUALS          reduce using rule 55 (expression_incr -> INCR_OP IDENTIFIER .)
+    GREATER_OR_EQUALS_OP reduce using rule 55 (expression_incr -> INCR_OP IDENTIFIER .)
+    LESSER_OR_EQUALS_OP reduce using rule 55 (expression_incr -> INCR_OP IDENTIFIER .)
+    NOT_EQUALS      reduce using rule 55 (expression_incr -> INCR_OP IDENTIFIER .)
+
+
+state 43
+
+    (26) whileloop -> WHILE ( . comparison )
+    (34) comparison -> . expression comparison_operator expression
+    (3) expression -> . expression_num
+    (4) expression -> . expression_sign
+    (5) expression -> . expression_op
+    (6) expression -> . expression_incr
+    (57) expression -> . ( expression )
+    (47) expression_num -> . NUMBER
+    (48) expression_num -> . IDENTIFIER
+    (49) expression_sign -> . ADD_OP expression
+    (50) expression_sign -> . SUB_OP expression
+    (51) expression_op -> . expression ADD_OP expression
+    (52) expression_op -> . expression SUB_OP expression
+    (53) expression_op -> . expression MUL_OP expression
+    (54) expression_op -> . expression DIV_OP expression
+    (55) expression_incr -> . INCR_OP IDENTIFIER
+    (56) expression_incr -> . DECR_OP IDENTIFIER
+
+    (               shift and go to state 31
+    NUMBER          shift and go to state 1
+    IDENTIFIER      shift and go to state 49
+    ADD_OP          shift and go to state 11
+    SUB_OP          shift and go to state 29
+    INCR_OP         shift and go to state 4
+    DECR_OP         shift and go to state 16
+
+    expression_sign                shift and go to state 33
+    expression_num                 shift and go to state 20
+    expression_incr                shift and go to state 30
+    expression_op                  shift and go to state 19
+    comparison                     shift and go to state 74
+    expression                     shift and go to state 75
+
+state 44
+
+    (43) initialization_bool -> BOOLEAN IDENTIFIER . AFFECTATION TRUE
+    (44) initialization_bool -> BOOLEAN IDENTIFIER . AFFECTATION FALSE
+    (45) initialization_bool -> BOOLEAN IDENTIFIER . AFFECTATION IDENTIFIER
+
+    AFFECTATION     shift and go to state 76
+
+
+state 45
+
+    (10) statement -> initialization - .
+
+    PRINT           reduce using rule 10 (statement -> initialization - .)
+    PRINTERR        reduce using rule 10 (statement -> initialization - .)
+    BREAK           reduce using rule 10 (statement -> initialization - .)
+    (               reduce using rule 10 (statement -> initialization - .)
+    IDENTIFIER      reduce using rule 10 (statement -> initialization - .)
+    NUMBER          reduce using rule 10 (statement -> initialization - .)
+    ADD_OP          reduce using rule 10 (statement -> initialization - .)
+    SUB_OP          reduce using rule 10 (statement -> initialization - .)
+    INCR_OP         reduce using rule 10 (statement -> initialization - .)
+    DECR_OP         reduce using rule 10 (statement -> initialization - .)
+    WHILE           reduce using rule 10 (statement -> initialization - .)
+    FOR             reduce using rule 10 (statement -> initialization - .)
+    FORNEG          reduce using rule 10 (statement -> initialization - .)
+    FORPOS          reduce using rule 10 (statement -> initialization - .)
+    IF              reduce using rule 10 (statement -> initialization - .)
+    FLOAT           reduce using rule 10 (statement -> initialization - .)
+    INT             reduce using rule 10 (statement -> initialization - .)
+    STRING          reduce using rule 10 (statement -> initialization - .)
+    BOOLEAN         reduce using rule 10 (statement -> initialization - .)
+    $end            reduce using rule 10 (statement -> initialization - .)
+    CLOSE_BRACE     reduce using rule 10 (statement -> initialization - .)
+
+
+state 46
+
+    (22) forloop -> FORNEG ( . initialization - NUMBER )
+    (23) forloop -> FORNEG ( . initialization - IDENTIFIER )
+    (35) initialization -> . initialization_num
+    (36) initialization -> . initialization_string
+    (37) initialization -> . initialization_bool
+    (38) initialization_num -> . FLOAT IDENTIFIER AFFECTATION NUMBER
+    (39) initialization_num -> . FLOAT IDENTIFIER AFFECTATION IDENTIFIER
+    (40) initialization_num -> . INT IDENTIFIER AFFECTATION NUMBER
+    (41) initialization_num -> . INT IDENTIFIER AFFECTATION IDENTIFIER
+    (42) initialization_string -> . STRING IDENTIFIER AFFECTATION TEXT
+    (43) initialization_bool -> . BOOLEAN IDENTIFIER AFFECTATION TRUE
+    (44) initialization_bool -> . BOOLEAN IDENTIFIER AFFECTATION FALSE
+    (45) initialization_bool -> . BOOLEAN IDENTIFIER AFFECTATION IDENTIFIER
+
+    FLOAT           shift and go to state 26
+    INT             shift and go to state 23
+    STRING          shift and go to state 10
+    BOOLEAN         shift and go to state 6
+
+    initialization_string          shift and go to state 27
+    initialization_num             shift and go to state 21
+    initialization                 shift and go to state 77
+    initialization_bool            shift and go to state 12
+
+state 47
+
+    (42) initialization_string -> STRING IDENTIFIER . AFFECTATION TEXT
+
+    AFFECTATION     shift and go to state 78
+
+
+state 48
+
+    (49) expression_sign -> ADD_OP expression .
+    (51) expression_op -> expression . ADD_OP expression
+    (52) expression_op -> expression . SUB_OP expression
+    (53) expression_op -> expression . MUL_OP expression
+    (54) expression_op -> expression . DIV_OP expression
+
+    ADD_OP          reduce using rule 49 (expression_sign -> ADD_OP expression .)
+    SUB_OP          reduce using rule 49 (expression_sign -> ADD_OP expression .)
+    MUL_OP          reduce using rule 49 (expression_sign -> ADD_OP expression .)
+    DIV_OP          reduce using rule 49 (expression_sign -> ADD_OP expression .)
+    )               reduce using rule 49 (expression_sign -> ADD_OP expression .)
+    -               reduce using rule 49 (expression_sign -> ADD_OP expression .)
+    GREATER_OP      reduce using rule 49 (expression_sign -> ADD_OP expression .)
+    LESSER_OP       reduce using rule 49 (expression_sign -> ADD_OP expression .)
+    EQUALS          reduce using rule 49 (expression_sign -> ADD_OP expression .)
+    GREATER_OR_EQUALS_OP reduce using rule 49 (expression_sign -> ADD_OP expression .)
+    LESSER_OR_EQUALS_OP reduce using rule 49 (expression_sign -> ADD_OP expression .)
+    NOT_EQUALS      reduce using rule 49 (expression_sign -> ADD_OP expression .)
+
+  ! ADD_OP          [ shift and go to state 39 ]
+  ! SUB_OP          [ shift and go to state 40 ]
+  ! MUL_OP          [ shift and go to state 36 ]
+  ! DIV_OP          [ shift and go to state 37 ]
+
+
+state 49
 
     (48) expression_num -> IDENTIFIER .
 
@@ -809,56 +1088,21 @@ state 39
     NOT_EQUALS      reduce using rule 48 (expression_num -> IDENTIFIER .)
 
 
-state 40
+state 50
 
-    (57) expression -> ( expression . )
-    (51) expression_op -> expression . ADD_OP expression
-    (52) expression_op -> expression . SUB_OP expression
-    (53) expression_op -> expression . MUL_OP expression
-    (54) expression_op -> expression . DIV_OP expression
+    (14) statement -> PRINTERR IDENTIFIER . -
 
-    )               shift and go to state 70
-    ADD_OP          shift and go to state 47
-    SUB_OP          shift and go to state 46
-    MUL_OP          shift and go to state 48
-    DIV_OP          shift and go to state 45
+    -               shift and go to state 79
 
 
-state 41
+state 51
 
-    (42) initialization_string -> STRING IDENTIFIER . AFFECTATION TEXT
+    (13) statement -> PRINTERR TEXT . -
 
-    AFFECTATION     shift and go to state 71
-
-
-state 42
-
-    (17) structure -> whileloop bloc .
-
-    PRINT           reduce using rule 17 (structure -> whileloop bloc .)
-    PRINTERR        reduce using rule 17 (structure -> whileloop bloc .)
-    BREAK           reduce using rule 17 (structure -> whileloop bloc .)
-    (               reduce using rule 17 (structure -> whileloop bloc .)
-    IDENTIFIER      reduce using rule 17 (structure -> whileloop bloc .)
-    NUMBER          reduce using rule 17 (structure -> whileloop bloc .)
-    ADD_OP          reduce using rule 17 (structure -> whileloop bloc .)
-    SUB_OP          reduce using rule 17 (structure -> whileloop bloc .)
-    INCR_OP         reduce using rule 17 (structure -> whileloop bloc .)
-    DECR_OP         reduce using rule 17 (structure -> whileloop bloc .)
-    WHILE           reduce using rule 17 (structure -> whileloop bloc .)
-    FOR             reduce using rule 17 (structure -> whileloop bloc .)
-    FORNEG          reduce using rule 17 (structure -> whileloop bloc .)
-    FORPOS          reduce using rule 17 (structure -> whileloop bloc .)
-    IF              reduce using rule 17 (structure -> whileloop bloc .)
-    FLOAT           reduce using rule 17 (structure -> whileloop bloc .)
-    INT             reduce using rule 17 (structure -> whileloop bloc .)
-    STRING          reduce using rule 17 (structure -> whileloop bloc .)
-    BOOLEAN         reduce using rule 17 (structure -> whileloop bloc .)
-    $end            reduce using rule 17 (structure -> whileloop bloc .)
-    CLOSE_BRACE     reduce using rule 17 (structure -> whileloop bloc .)
+    -               shift and go to state 80
 
 
-state 43
+state 52
 
     (16) bloc -> OPEN_BRACE . program CLOSE_BRACE
     (1) program -> . statement
@@ -911,270 +1155,42 @@ state 43
     (44) initialization_bool -> . BOOLEAN IDENTIFIER AFFECTATION FALSE
     (45) initialization_bool -> . BOOLEAN IDENTIFIER AFFECTATION IDENTIFIER
 
-    PRINT           shift and go to state 35
-    PRINTERR        shift and go to state 31
-    BREAK           shift and go to state 4
-    (               shift and go to state 7
-    IDENTIFIER      shift and go to state 30
-    NUMBER          shift and go to state 28
-    ADD_OP          shift and go to state 19
-    SUB_OP          shift and go to state 25
-    INCR_OP         shift and go to state 14
-    DECR_OP         shift and go to state 21
-    WHILE           shift and go to state 15
-    FOR             shift and go to state 18
-    FORNEG          shift and go to state 27
-    FORPOS          shift and go to state 33
-    IF              shift and go to state 23
-    FLOAT           shift and go to state 16
-    INT             shift and go to state 6
-    STRING          shift and go to state 8
-    BOOLEAN         shift and go to state 20
+    PRINT           shift and go to state 25
+    PRINTERR        shift and go to state 13
+    BREAK           shift and go to state 32
+    (               shift and go to state 31
+    IDENTIFIER      shift and go to state 3
+    NUMBER          shift and go to state 1
+    ADD_OP          shift and go to state 11
+    SUB_OP          shift and go to state 29
+    INCR_OP         shift and go to state 4
+    DECR_OP         shift and go to state 16
+    WHILE           shift and go to state 5
+    FOR             shift and go to state 22
+    FORNEG          shift and go to state 9
+    FORPOS          shift and go to state 24
+    IF              shift and go to state 15
+    FLOAT           shift and go to state 26
+    INT             shift and go to state 23
+    STRING          shift and go to state 10
+    BOOLEAN         shift and go to state 6
 
-    initialization_num             shift and go to state 10
-    whileloop                      shift and go to state 9
-    expression_op                  shift and go to state 22
-    expression                     shift and go to state 12
-    program                        shift and go to state 72
-    expression_incr                shift and go to state 11
-    expression_num                 shift and go to state 2
-    expression_sign                shift and go to state 32
-    assignation                    shift and go to state 3
-    statement                      shift and go to state 13
-    if                             shift and go to state 34
-    forloop                        shift and go to state 17
-    initialization_string          shift and go to state 24
-    initialization_bool            shift and go to state 29
-    structure                      shift and go to state 5
-    initialization                 shift and go to state 26
-
-state 44
-
-    (7) statement -> expression - .
-
-    PRINT           reduce using rule 7 (statement -> expression - .)
-    PRINTERR        reduce using rule 7 (statement -> expression - .)
-    BREAK           reduce using rule 7 (statement -> expression - .)
-    (               reduce using rule 7 (statement -> expression - .)
-    IDENTIFIER      reduce using rule 7 (statement -> expression - .)
-    NUMBER          reduce using rule 7 (statement -> expression - .)
-    ADD_OP          reduce using rule 7 (statement -> expression - .)
-    SUB_OP          reduce using rule 7 (statement -> expression - .)
-    INCR_OP         reduce using rule 7 (statement -> expression - .)
-    DECR_OP         reduce using rule 7 (statement -> expression - .)
-    WHILE           reduce using rule 7 (statement -> expression - .)
-    FOR             reduce using rule 7 (statement -> expression - .)
-    FORNEG          reduce using rule 7 (statement -> expression - .)
-    FORPOS          reduce using rule 7 (statement -> expression - .)
-    IF              reduce using rule 7 (statement -> expression - .)
-    FLOAT           reduce using rule 7 (statement -> expression - .)
-    INT             reduce using rule 7 (statement -> expression - .)
-    STRING          reduce using rule 7 (statement -> expression - .)
-    BOOLEAN         reduce using rule 7 (statement -> expression - .)
-    $end            reduce using rule 7 (statement -> expression - .)
-    CLOSE_BRACE     reduce using rule 7 (statement -> expression - .)
-
-
-state 45
-
-    (54) expression_op -> expression DIV_OP . expression
-    (3) expression -> . expression_num
-    (4) expression -> . expression_sign
-    (5) expression -> . expression_op
-    (6) expression -> . expression_incr
-    (57) expression -> . ( expression )
-    (47) expression_num -> . NUMBER
-    (48) expression_num -> . IDENTIFIER
-    (49) expression_sign -> . ADD_OP expression
-    (50) expression_sign -> . SUB_OP expression
-    (51) expression_op -> . expression ADD_OP expression
-    (52) expression_op -> . expression SUB_OP expression
-    (53) expression_op -> . expression MUL_OP expression
-    (54) expression_op -> . expression DIV_OP expression
-    (55) expression_incr -> . INCR_OP IDENTIFIER
-    (56) expression_incr -> . DECR_OP IDENTIFIER
-
-    (               shift and go to state 7
-    NUMBER          shift and go to state 28
-    IDENTIFIER      shift and go to state 39
-    ADD_OP          shift and go to state 19
-    SUB_OP          shift and go to state 25
-    INCR_OP         shift and go to state 14
-    DECR_OP         shift and go to state 21
-
-    expression                     shift and go to state 73
-    expression_op                  shift and go to state 22
-    expression_incr                shift and go to state 11
-    expression_num                 shift and go to state 2
-    expression_sign                shift and go to state 32
-
-state 46
-
-    (52) expression_op -> expression SUB_OP . expression
-    (3) expression -> . expression_num
-    (4) expression -> . expression_sign
-    (5) expression -> . expression_op
-    (6) expression -> . expression_incr
-    (57) expression -> . ( expression )
-    (47) expression_num -> . NUMBER
-    (48) expression_num -> . IDENTIFIER
-    (49) expression_sign -> . ADD_OP expression
-    (50) expression_sign -> . SUB_OP expression
-    (51) expression_op -> . expression ADD_OP expression
-    (52) expression_op -> . expression SUB_OP expression
-    (53) expression_op -> . expression MUL_OP expression
-    (54) expression_op -> . expression DIV_OP expression
-    (55) expression_incr -> . INCR_OP IDENTIFIER
-    (56) expression_incr -> . DECR_OP IDENTIFIER
-
-    (               shift and go to state 7
-    NUMBER          shift and go to state 28
-    IDENTIFIER      shift and go to state 39
-    ADD_OP          shift and go to state 19
-    SUB_OP          shift and go to state 25
-    INCR_OP         shift and go to state 14
-    DECR_OP         shift and go to state 21
-
-    expression                     shift and go to state 74
-    expression_op                  shift and go to state 22
-    expression_incr                shift and go to state 11
-    expression_num                 shift and go to state 2
-    expression_sign                shift and go to state 32
-
-state 47
-
-    (51) expression_op -> expression ADD_OP . expression
-    (3) expression -> . expression_num
-    (4) expression -> . expression_sign
-    (5) expression -> . expression_op
-    (6) expression -> . expression_incr
-    (57) expression -> . ( expression )
-    (47) expression_num -> . NUMBER
-    (48) expression_num -> . IDENTIFIER
-    (49) expression_sign -> . ADD_OP expression
-    (50) expression_sign -> . SUB_OP expression
-    (51) expression_op -> . expression ADD_OP expression
-    (52) expression_op -> . expression SUB_OP expression
-    (53) expression_op -> . expression MUL_OP expression
-    (54) expression_op -> . expression DIV_OP expression
-    (55) expression_incr -> . INCR_OP IDENTIFIER
-    (56) expression_incr -> . DECR_OP IDENTIFIER
-
-    (               shift and go to state 7
-    NUMBER          shift and go to state 28
-    IDENTIFIER      shift and go to state 39
-    ADD_OP          shift and go to state 19
-    SUB_OP          shift and go to state 25
-    INCR_OP         shift and go to state 14
-    DECR_OP         shift and go to state 21
-
-    expression                     shift and go to state 75
-    expression_op                  shift and go to state 22
-    expression_incr                shift and go to state 11
-    expression_num                 shift and go to state 2
-    expression_sign                shift and go to state 32
-
-state 48
-
-    (53) expression_op -> expression MUL_OP . expression
-    (3) expression -> . expression_num
-    (4) expression -> . expression_sign
-    (5) expression -> . expression_op
-    (6) expression -> . expression_incr
-    (57) expression -> . ( expression )
-    (47) expression_num -> . NUMBER
-    (48) expression_num -> . IDENTIFIER
-    (49) expression_sign -> . ADD_OP expression
-    (50) expression_sign -> . SUB_OP expression
-    (51) expression_op -> . expression ADD_OP expression
-    (52) expression_op -> . expression SUB_OP expression
-    (53) expression_op -> . expression MUL_OP expression
-    (54) expression_op -> . expression DIV_OP expression
-    (55) expression_incr -> . INCR_OP IDENTIFIER
-    (56) expression_incr -> . DECR_OP IDENTIFIER
-
-    (               shift and go to state 7
-    NUMBER          shift and go to state 28
-    IDENTIFIER      shift and go to state 39
-    ADD_OP          shift and go to state 19
-    SUB_OP          shift and go to state 25
-    INCR_OP         shift and go to state 14
-    DECR_OP         shift and go to state 21
-
-    expression                     shift and go to state 76
-    expression_op                  shift and go to state 22
-    expression_incr                shift and go to state 11
-    expression_num                 shift and go to state 2
-    expression_sign                shift and go to state 32
-
-state 49
-
-    (2) program -> statement program .
-
-    CLOSE_BRACE     reduce using rule 2 (program -> statement program .)
-    $end            reduce using rule 2 (program -> statement program .)
-
-
-state 50
-
-    (55) expression_incr -> INCR_OP IDENTIFIER .
-
-    ADD_OP          reduce using rule 55 (expression_incr -> INCR_OP IDENTIFIER .)
-    SUB_OP          reduce using rule 55 (expression_incr -> INCR_OP IDENTIFIER .)
-    MUL_OP          reduce using rule 55 (expression_incr -> INCR_OP IDENTIFIER .)
-    DIV_OP          reduce using rule 55 (expression_incr -> INCR_OP IDENTIFIER .)
-    -               reduce using rule 55 (expression_incr -> INCR_OP IDENTIFIER .)
-    )               reduce using rule 55 (expression_incr -> INCR_OP IDENTIFIER .)
-    GREATER_OP      reduce using rule 55 (expression_incr -> INCR_OP IDENTIFIER .)
-    LESSER_OP       reduce using rule 55 (expression_incr -> INCR_OP IDENTIFIER .)
-    EQUALS          reduce using rule 55 (expression_incr -> INCR_OP IDENTIFIER .)
-    GREATER_OR_EQUALS_OP reduce using rule 55 (expression_incr -> INCR_OP IDENTIFIER .)
-    LESSER_OR_EQUALS_OP reduce using rule 55 (expression_incr -> INCR_OP IDENTIFIER .)
-    NOT_EQUALS      reduce using rule 55 (expression_incr -> INCR_OP IDENTIFIER .)
-
-
-state 51
-
-    (26) whileloop -> WHILE ( . comparison )
-    (34) comparison -> . expression comparison_operator expression
-    (3) expression -> . expression_num
-    (4) expression -> . expression_sign
-    (5) expression -> . expression_op
-    (6) expression -> . expression_incr
-    (57) expression -> . ( expression )
-    (47) expression_num -> . NUMBER
-    (48) expression_num -> . IDENTIFIER
-    (49) expression_sign -> . ADD_OP expression
-    (50) expression_sign -> . SUB_OP expression
-    (51) expression_op -> . expression ADD_OP expression
-    (52) expression_op -> . expression SUB_OP expression
-    (53) expression_op -> . expression MUL_OP expression
-    (54) expression_op -> . expression DIV_OP expression
-    (55) expression_incr -> . INCR_OP IDENTIFIER
-    (56) expression_incr -> . DECR_OP IDENTIFIER
-
-    (               shift and go to state 7
-    NUMBER          shift and go to state 28
-    IDENTIFIER      shift and go to state 39
-    ADD_OP          shift and go to state 19
-    SUB_OP          shift and go to state 25
-    INCR_OP         shift and go to state 14
-    DECR_OP         shift and go to state 21
-
-    expression_op                  shift and go to state 22
-    expression                     shift and go to state 77
-    expression_num                 shift and go to state 2
-    expression_incr                shift and go to state 11
-    expression_sign                shift and go to state 32
-    comparison                     shift and go to state 78
-
-state 52
-
-    (38) initialization_num -> FLOAT IDENTIFIER . AFFECTATION NUMBER
-    (39) initialization_num -> FLOAT IDENTIFIER . AFFECTATION IDENTIFIER
-
-    AFFECTATION     shift and go to state 79
-
+    forloop                        shift and go to state 14
+    initialization_string          shift and go to state 27
+    if                             shift and go to state 28
+    expression                     shift and go to state 2
+    assignation                    shift and go to state 17
+    initialization_bool            shift and go to state 12
+    statement                      shift and go to state 18
+    expression_sign                shift and go to state 33
+    expression_num                 shift and go to state 20
+    initialization_num             shift and go to state 21
+    expression_incr                shift and go to state 30
+    program                        shift and go to state 81
+    expression_op                  shift and go to state 19
+    whileloop                      shift and go to state 34
+    structure                      shift and go to state 35
+    initialization                 shift and go to state 7
 
 state 53
 
@@ -1205,85 +1221,6 @@ state 53
 
 state 54
 
-    (21) forloop -> FOR ( . initialization - comparison - expression )
-    (35) initialization -> . initialization_num
-    (36) initialization -> . initialization_string
-    (37) initialization -> . initialization_bool
-    (38) initialization_num -> . FLOAT IDENTIFIER AFFECTATION NUMBER
-    (39) initialization_num -> . FLOAT IDENTIFIER AFFECTATION IDENTIFIER
-    (40) initialization_num -> . INT IDENTIFIER AFFECTATION NUMBER
-    (41) initialization_num -> . INT IDENTIFIER AFFECTATION IDENTIFIER
-    (42) initialization_string -> . STRING IDENTIFIER AFFECTATION TEXT
-    (43) initialization_bool -> . BOOLEAN IDENTIFIER AFFECTATION TRUE
-    (44) initialization_bool -> . BOOLEAN IDENTIFIER AFFECTATION FALSE
-    (45) initialization_bool -> . BOOLEAN IDENTIFIER AFFECTATION IDENTIFIER
-
-    FLOAT           shift and go to state 16
-    INT             shift and go to state 6
-    STRING          shift and go to state 8
-    BOOLEAN         shift and go to state 20
-
-    initialization_bool            shift and go to state 29
-    initialization_string          shift and go to state 24
-    initialization_num             shift and go to state 10
-    initialization                 shift and go to state 80
-
-state 55
-
-    (49) expression_sign -> ADD_OP expression .
-    (51) expression_op -> expression . ADD_OP expression
-    (52) expression_op -> expression . SUB_OP expression
-    (53) expression_op -> expression . MUL_OP expression
-    (54) expression_op -> expression . DIV_OP expression
-
-    )               reduce using rule 49 (expression_sign -> ADD_OP expression .)
-    ADD_OP          reduce using rule 49 (expression_sign -> ADD_OP expression .)
-    SUB_OP          reduce using rule 49 (expression_sign -> ADD_OP expression .)
-    MUL_OP          reduce using rule 49 (expression_sign -> ADD_OP expression .)
-    DIV_OP          reduce using rule 49 (expression_sign -> ADD_OP expression .)
-    -               reduce using rule 49 (expression_sign -> ADD_OP expression .)
-    GREATER_OP      reduce using rule 49 (expression_sign -> ADD_OP expression .)
-    LESSER_OP       reduce using rule 49 (expression_sign -> ADD_OP expression .)
-    EQUALS          reduce using rule 49 (expression_sign -> ADD_OP expression .)
-    GREATER_OR_EQUALS_OP reduce using rule 49 (expression_sign -> ADD_OP expression .)
-    LESSER_OR_EQUALS_OP reduce using rule 49 (expression_sign -> ADD_OP expression .)
-    NOT_EQUALS      reduce using rule 49 (expression_sign -> ADD_OP expression .)
-
-  ! ADD_OP          [ shift and go to state 47 ]
-  ! SUB_OP          [ shift and go to state 46 ]
-  ! MUL_OP          [ shift and go to state 48 ]
-  ! DIV_OP          [ shift and go to state 45 ]
-
-
-state 56
-
-    (43) initialization_bool -> BOOLEAN IDENTIFIER . AFFECTATION TRUE
-    (44) initialization_bool -> BOOLEAN IDENTIFIER . AFFECTATION FALSE
-    (45) initialization_bool -> BOOLEAN IDENTIFIER . AFFECTATION IDENTIFIER
-
-    AFFECTATION     shift and go to state 81
-
-
-state 57
-
-    (56) expression_incr -> DECR_OP IDENTIFIER .
-
-    ADD_OP          reduce using rule 56 (expression_incr -> DECR_OP IDENTIFIER .)
-    SUB_OP          reduce using rule 56 (expression_incr -> DECR_OP IDENTIFIER .)
-    MUL_OP          reduce using rule 56 (expression_incr -> DECR_OP IDENTIFIER .)
-    DIV_OP          reduce using rule 56 (expression_incr -> DECR_OP IDENTIFIER .)
-    -               reduce using rule 56 (expression_incr -> DECR_OP IDENTIFIER .)
-    )               reduce using rule 56 (expression_incr -> DECR_OP IDENTIFIER .)
-    GREATER_OP      reduce using rule 56 (expression_incr -> DECR_OP IDENTIFIER .)
-    LESSER_OP       reduce using rule 56 (expression_incr -> DECR_OP IDENTIFIER .)
-    EQUALS          reduce using rule 56 (expression_incr -> DECR_OP IDENTIFIER .)
-    GREATER_OR_EQUALS_OP reduce using rule 56 (expression_incr -> DECR_OP IDENTIFIER .)
-    LESSER_OR_EQUALS_OP reduce using rule 56 (expression_incr -> DECR_OP IDENTIFIER .)
-    NOT_EQUALS      reduce using rule 56 (expression_incr -> DECR_OP IDENTIFIER .)
-
-
-state 58
-
     (27) if -> IF ( . comparison )
     (34) comparison -> . expression comparison_operator expression
     (3) expression -> . expression_num
@@ -1302,79 +1239,77 @@ state 58
     (55) expression_incr -> . INCR_OP IDENTIFIER
     (56) expression_incr -> . DECR_OP IDENTIFIER
 
-    (               shift and go to state 7
-    NUMBER          shift and go to state 28
-    IDENTIFIER      shift and go to state 39
-    ADD_OP          shift and go to state 19
-    SUB_OP          shift and go to state 25
-    INCR_OP         shift and go to state 14
-    DECR_OP         shift and go to state 21
+    (               shift and go to state 31
+    NUMBER          shift and go to state 1
+    IDENTIFIER      shift and go to state 49
+    ADD_OP          shift and go to state 11
+    SUB_OP          shift and go to state 29
+    INCR_OP         shift and go to state 4
+    DECR_OP         shift and go to state 16
 
-    expression_op                  shift and go to state 22
-    expression                     shift and go to state 77
-    expression_num                 shift and go to state 2
-    expression_incr                shift and go to state 11
-    expression_sign                shift and go to state 32
+    expression_sign                shift and go to state 33
+    expression_num                 shift and go to state 20
+    expression_incr                shift and go to state 30
+    expression_op                  shift and go to state 19
     comparison                     shift and go to state 82
+    expression                     shift and go to state 75
 
-state 59
+state 55
 
-    (50) expression_sign -> SUB_OP expression .
-    (51) expression_op -> expression . ADD_OP expression
-    (52) expression_op -> expression . SUB_OP expression
-    (53) expression_op -> expression . MUL_OP expression
-    (54) expression_op -> expression . DIV_OP expression
+    (56) expression_incr -> DECR_OP IDENTIFIER .
 
-    )               reduce using rule 50 (expression_sign -> SUB_OP expression .)
-    ADD_OP          reduce using rule 50 (expression_sign -> SUB_OP expression .)
-    SUB_OP          reduce using rule 50 (expression_sign -> SUB_OP expression .)
-    MUL_OP          reduce using rule 50 (expression_sign -> SUB_OP expression .)
-    DIV_OP          reduce using rule 50 (expression_sign -> SUB_OP expression .)
-    -               reduce using rule 50 (expression_sign -> SUB_OP expression .)
-    GREATER_OP      reduce using rule 50 (expression_sign -> SUB_OP expression .)
-    LESSER_OP       reduce using rule 50 (expression_sign -> SUB_OP expression .)
-    EQUALS          reduce using rule 50 (expression_sign -> SUB_OP expression .)
-    GREATER_OR_EQUALS_OP reduce using rule 50 (expression_sign -> SUB_OP expression .)
-    LESSER_OR_EQUALS_OP reduce using rule 50 (expression_sign -> SUB_OP expression .)
-    NOT_EQUALS      reduce using rule 50 (expression_sign -> SUB_OP expression .)
-
-  ! ADD_OP          [ shift and go to state 47 ]
-  ! SUB_OP          [ shift and go to state 46 ]
-  ! MUL_OP          [ shift and go to state 48 ]
-  ! DIV_OP          [ shift and go to state 45 ]
+    ADD_OP          reduce using rule 56 (expression_incr -> DECR_OP IDENTIFIER .)
+    SUB_OP          reduce using rule 56 (expression_incr -> DECR_OP IDENTIFIER .)
+    MUL_OP          reduce using rule 56 (expression_incr -> DECR_OP IDENTIFIER .)
+    DIV_OP          reduce using rule 56 (expression_incr -> DECR_OP IDENTIFIER .)
+    -               reduce using rule 56 (expression_incr -> DECR_OP IDENTIFIER .)
+    )               reduce using rule 56 (expression_incr -> DECR_OP IDENTIFIER .)
+    GREATER_OP      reduce using rule 56 (expression_incr -> DECR_OP IDENTIFIER .)
+    LESSER_OP       reduce using rule 56 (expression_incr -> DECR_OP IDENTIFIER .)
+    EQUALS          reduce using rule 56 (expression_incr -> DECR_OP IDENTIFIER .)
+    GREATER_OR_EQUALS_OP reduce using rule 56 (expression_incr -> DECR_OP IDENTIFIER .)
+    LESSER_OR_EQUALS_OP reduce using rule 56 (expression_incr -> DECR_OP IDENTIFIER .)
+    NOT_EQUALS      reduce using rule 56 (expression_incr -> DECR_OP IDENTIFIER .)
 
 
-state 60
+state 56
 
-    (10) statement -> initialization - .
+    (8) statement -> assignation - .
 
-    PRINT           reduce using rule 10 (statement -> initialization - .)
-    PRINTERR        reduce using rule 10 (statement -> initialization - .)
-    BREAK           reduce using rule 10 (statement -> initialization - .)
-    (               reduce using rule 10 (statement -> initialization - .)
-    IDENTIFIER      reduce using rule 10 (statement -> initialization - .)
-    NUMBER          reduce using rule 10 (statement -> initialization - .)
-    ADD_OP          reduce using rule 10 (statement -> initialization - .)
-    SUB_OP          reduce using rule 10 (statement -> initialization - .)
-    INCR_OP         reduce using rule 10 (statement -> initialization - .)
-    DECR_OP         reduce using rule 10 (statement -> initialization - .)
-    WHILE           reduce using rule 10 (statement -> initialization - .)
-    FOR             reduce using rule 10 (statement -> initialization - .)
-    FORNEG          reduce using rule 10 (statement -> initialization - .)
-    FORPOS          reduce using rule 10 (statement -> initialization - .)
-    IF              reduce using rule 10 (statement -> initialization - .)
-    FLOAT           reduce using rule 10 (statement -> initialization - .)
-    INT             reduce using rule 10 (statement -> initialization - .)
-    STRING          reduce using rule 10 (statement -> initialization - .)
-    BOOLEAN         reduce using rule 10 (statement -> initialization - .)
-    $end            reduce using rule 10 (statement -> initialization - .)
-    CLOSE_BRACE     reduce using rule 10 (statement -> initialization - .)
+    PRINT           reduce using rule 8 (statement -> assignation - .)
+    PRINTERR        reduce using rule 8 (statement -> assignation - .)
+    BREAK           reduce using rule 8 (statement -> assignation - .)
+    (               reduce using rule 8 (statement -> assignation - .)
+    IDENTIFIER      reduce using rule 8 (statement -> assignation - .)
+    NUMBER          reduce using rule 8 (statement -> assignation - .)
+    ADD_OP          reduce using rule 8 (statement -> assignation - .)
+    SUB_OP          reduce using rule 8 (statement -> assignation - .)
+    INCR_OP         reduce using rule 8 (statement -> assignation - .)
+    DECR_OP         reduce using rule 8 (statement -> assignation - .)
+    WHILE           reduce using rule 8 (statement -> assignation - .)
+    FOR             reduce using rule 8 (statement -> assignation - .)
+    FORNEG          reduce using rule 8 (statement -> assignation - .)
+    FORPOS          reduce using rule 8 (statement -> assignation - .)
+    IF              reduce using rule 8 (statement -> assignation - .)
+    FLOAT           reduce using rule 8 (statement -> assignation - .)
+    INT             reduce using rule 8 (statement -> assignation - .)
+    STRING          reduce using rule 8 (statement -> assignation - .)
+    BOOLEAN         reduce using rule 8 (statement -> assignation - .)
+    $end            reduce using rule 8 (statement -> assignation - .)
+    CLOSE_BRACE     reduce using rule 8 (statement -> assignation - .)
 
 
-state 61
+state 57
 
-    (22) forloop -> FORNEG ( . initialization - NUMBER )
-    (23) forloop -> FORNEG ( . initialization - IDENTIFIER )
+    (2) program -> statement program .
+
+    $end            reduce using rule 2 (program -> statement program .)
+    CLOSE_BRACE     reduce using rule 2 (program -> statement program .)
+
+
+state 58
+
+    (21) forloop -> FOR ( . initialization - comparison - expression )
     (35) initialization -> . initialization_num
     (36) initialization -> . initialization_string
     (37) initialization -> . initialization_bool
@@ -1387,64 +1322,25 @@ state 61
     (44) initialization_bool -> . BOOLEAN IDENTIFIER AFFECTATION FALSE
     (45) initialization_bool -> . BOOLEAN IDENTIFIER AFFECTATION IDENTIFIER
 
-    FLOAT           shift and go to state 16
-    INT             shift and go to state 6
-    STRING          shift and go to state 8
-    BOOLEAN         shift and go to state 20
+    FLOAT           shift and go to state 26
+    INT             shift and go to state 23
+    STRING          shift and go to state 10
+    BOOLEAN         shift and go to state 6
 
-    initialization_num             shift and go to state 10
-    initialization_bool            shift and go to state 29
-    initialization_string          shift and go to state 24
+    initialization_num             shift and go to state 21
     initialization                 shift and go to state 83
+    initialization_string          shift and go to state 27
+    initialization_bool            shift and go to state 12
 
-state 62
+state 59
 
-    (46) assignation -> IDENTIFIER AFFECTATION . expression
-    (3) expression -> . expression_num
-    (4) expression -> . expression_sign
-    (5) expression -> . expression_op
-    (6) expression -> . expression_incr
-    (57) expression -> . ( expression )
-    (47) expression_num -> . NUMBER
-    (48) expression_num -> . IDENTIFIER
-    (49) expression_sign -> . ADD_OP expression
-    (50) expression_sign -> . SUB_OP expression
-    (51) expression_op -> . expression ADD_OP expression
-    (52) expression_op -> . expression SUB_OP expression
-    (53) expression_op -> . expression MUL_OP expression
-    (54) expression_op -> . expression DIV_OP expression
-    (55) expression_incr -> . INCR_OP IDENTIFIER
-    (56) expression_incr -> . DECR_OP IDENTIFIER
+    (40) initialization_num -> INT IDENTIFIER . AFFECTATION NUMBER
+    (41) initialization_num -> INT IDENTIFIER . AFFECTATION IDENTIFIER
 
-    (               shift and go to state 7
-    NUMBER          shift and go to state 28
-    IDENTIFIER      shift and go to state 39
-    ADD_OP          shift and go to state 19
-    SUB_OP          shift and go to state 25
-    INCR_OP         shift and go to state 14
-    DECR_OP         shift and go to state 21
-
-    expression                     shift and go to state 84
-    expression_op                  shift and go to state 22
-    expression_incr                shift and go to state 11
-    expression_num                 shift and go to state 2
-    expression_sign                shift and go to state 32
-
-state 63
-
-    (13) statement -> PRINTERR TEXT . -
-
-    -               shift and go to state 85
+    AFFECTATION     shift and go to state 84
 
 
-state 64
-
-    (14) statement -> PRINTERR IDENTIFIER . -
-
-    -               shift and go to state 86
-
-
-state 65
+state 60
 
     (24) forloop -> FORPOS ( . initialization - NUMBER )
     (25) forloop -> FORPOS ( . initialization - IDENTIFIER )
@@ -1460,17 +1356,39 @@ state 65
     (44) initialization_bool -> . BOOLEAN IDENTIFIER AFFECTATION FALSE
     (45) initialization_bool -> . BOOLEAN IDENTIFIER AFFECTATION IDENTIFIER
 
-    FLOAT           shift and go to state 16
-    INT             shift and go to state 6
-    STRING          shift and go to state 8
-    BOOLEAN         shift and go to state 20
+    FLOAT           shift and go to state 26
+    INT             shift and go to state 23
+    STRING          shift and go to state 10
+    BOOLEAN         shift and go to state 6
 
-    initialization_num             shift and go to state 10
-    initialization_bool            shift and go to state 29
-    initialization_string          shift and go to state 24
-    initialization                 shift and go to state 87
+    initialization_string          shift and go to state 27
+    initialization_num             shift and go to state 21
+    initialization                 shift and go to state 85
+    initialization_bool            shift and go to state 12
 
-state 66
+state 61
+
+    (12) statement -> PRINT IDENTIFIER . -
+
+    -               shift and go to state 86
+
+
+state 62
+
+    (11) statement -> PRINT TEXT . -
+
+    -               shift and go to state 87
+
+
+state 63
+
+    (38) initialization_num -> FLOAT IDENTIFIER . AFFECTATION NUMBER
+    (39) initialization_num -> FLOAT IDENTIFIER . AFFECTATION IDENTIFIER
+
+    AFFECTATION     shift and go to state 88
+
+
+state 64
 
     (19) structure -> if bloc .
     (20) structure -> if bloc . ELSE bloc
@@ -1496,65 +1414,133 @@ state 66
     BOOLEAN         reduce using rule 19 (structure -> if bloc .)
     $end            reduce using rule 19 (structure -> if bloc .)
     CLOSE_BRACE     reduce using rule 19 (structure -> if bloc .)
-    ELSE            shift and go to state 88
+    ELSE            shift and go to state 89
+
+
+state 65
+
+    (50) expression_sign -> SUB_OP expression .
+    (51) expression_op -> expression . ADD_OP expression
+    (52) expression_op -> expression . SUB_OP expression
+    (53) expression_op -> expression . MUL_OP expression
+    (54) expression_op -> expression . DIV_OP expression
+
+    ADD_OP          reduce using rule 50 (expression_sign -> SUB_OP expression .)
+    SUB_OP          reduce using rule 50 (expression_sign -> SUB_OP expression .)
+    MUL_OP          reduce using rule 50 (expression_sign -> SUB_OP expression .)
+    DIV_OP          reduce using rule 50 (expression_sign -> SUB_OP expression .)
+    )               reduce using rule 50 (expression_sign -> SUB_OP expression .)
+    -               reduce using rule 50 (expression_sign -> SUB_OP expression .)
+    GREATER_OP      reduce using rule 50 (expression_sign -> SUB_OP expression .)
+    LESSER_OP       reduce using rule 50 (expression_sign -> SUB_OP expression .)
+    EQUALS          reduce using rule 50 (expression_sign -> SUB_OP expression .)
+    GREATER_OR_EQUALS_OP reduce using rule 50 (expression_sign -> SUB_OP expression .)
+    LESSER_OR_EQUALS_OP reduce using rule 50 (expression_sign -> SUB_OP expression .)
+    NOT_EQUALS      reduce using rule 50 (expression_sign -> SUB_OP expression .)
+
+  ! ADD_OP          [ shift and go to state 39 ]
+  ! SUB_OP          [ shift and go to state 40 ]
+  ! MUL_OP          [ shift and go to state 36 ]
+  ! DIV_OP          [ shift and go to state 37 ]
+
+
+state 66
+
+    (57) expression -> ( expression . )
+    (51) expression_op -> expression . ADD_OP expression
+    (52) expression_op -> expression . SUB_OP expression
+    (53) expression_op -> expression . MUL_OP expression
+    (54) expression_op -> expression . DIV_OP expression
+
+    )               shift and go to state 90
+    ADD_OP          shift and go to state 39
+    SUB_OP          shift and go to state 40
+    MUL_OP          shift and go to state 36
+    DIV_OP          shift and go to state 37
 
 
 state 67
 
-    (11) statement -> PRINT TEXT . -
+    (15) statement -> BREAK - .
 
-    -               shift and go to state 89
+    PRINT           reduce using rule 15 (statement -> BREAK - .)
+    PRINTERR        reduce using rule 15 (statement -> BREAK - .)
+    BREAK           reduce using rule 15 (statement -> BREAK - .)
+    (               reduce using rule 15 (statement -> BREAK - .)
+    IDENTIFIER      reduce using rule 15 (statement -> BREAK - .)
+    NUMBER          reduce using rule 15 (statement -> BREAK - .)
+    ADD_OP          reduce using rule 15 (statement -> BREAK - .)
+    SUB_OP          reduce using rule 15 (statement -> BREAK - .)
+    INCR_OP         reduce using rule 15 (statement -> BREAK - .)
+    DECR_OP         reduce using rule 15 (statement -> BREAK - .)
+    WHILE           reduce using rule 15 (statement -> BREAK - .)
+    FOR             reduce using rule 15 (statement -> BREAK - .)
+    FORNEG          reduce using rule 15 (statement -> BREAK - .)
+    FORPOS          reduce using rule 15 (statement -> BREAK - .)
+    IF              reduce using rule 15 (statement -> BREAK - .)
+    FLOAT           reduce using rule 15 (statement -> BREAK - .)
+    INT             reduce using rule 15 (statement -> BREAK - .)
+    STRING          reduce using rule 15 (statement -> BREAK - .)
+    BOOLEAN         reduce using rule 15 (statement -> BREAK - .)
+    $end            reduce using rule 15 (statement -> BREAK - .)
+    CLOSE_BRACE     reduce using rule 15 (statement -> BREAK - .)
 
 
 state 68
 
-    (12) statement -> PRINT IDENTIFIER . -
+    (17) structure -> whileloop bloc .
 
-    -               shift and go to state 90
+    PRINT           reduce using rule 17 (structure -> whileloop bloc .)
+    PRINTERR        reduce using rule 17 (structure -> whileloop bloc .)
+    BREAK           reduce using rule 17 (structure -> whileloop bloc .)
+    (               reduce using rule 17 (structure -> whileloop bloc .)
+    IDENTIFIER      reduce using rule 17 (structure -> whileloop bloc .)
+    NUMBER          reduce using rule 17 (structure -> whileloop bloc .)
+    ADD_OP          reduce using rule 17 (structure -> whileloop bloc .)
+    SUB_OP          reduce using rule 17 (structure -> whileloop bloc .)
+    INCR_OP         reduce using rule 17 (structure -> whileloop bloc .)
+    DECR_OP         reduce using rule 17 (structure -> whileloop bloc .)
+    WHILE           reduce using rule 17 (structure -> whileloop bloc .)
+    FOR             reduce using rule 17 (structure -> whileloop bloc .)
+    FORNEG          reduce using rule 17 (structure -> whileloop bloc .)
+    FORPOS          reduce using rule 17 (structure -> whileloop bloc .)
+    IF              reduce using rule 17 (structure -> whileloop bloc .)
+    FLOAT           reduce using rule 17 (structure -> whileloop bloc .)
+    INT             reduce using rule 17 (structure -> whileloop bloc .)
+    STRING          reduce using rule 17 (structure -> whileloop bloc .)
+    BOOLEAN         reduce using rule 17 (structure -> whileloop bloc .)
+    $end            reduce using rule 17 (structure -> whileloop bloc .)
+    CLOSE_BRACE     reduce using rule 17 (structure -> whileloop bloc .)
 
 
 state 69
 
-    (40) initialization_num -> INT IDENTIFIER AFFECTATION . NUMBER
-    (41) initialization_num -> INT IDENTIFIER AFFECTATION . IDENTIFIER
+    (53) expression_op -> expression MUL_OP expression .
+    (51) expression_op -> expression . ADD_OP expression
+    (52) expression_op -> expression . SUB_OP expression
+    (53) expression_op -> expression . MUL_OP expression
+    (54) expression_op -> expression . DIV_OP expression
 
-    NUMBER          shift and go to state 91
-    IDENTIFIER      shift and go to state 92
+    ADD_OP          reduce using rule 53 (expression_op -> expression MUL_OP expression .)
+    MUL_OP          reduce using rule 53 (expression_op -> expression MUL_OP expression .)
+    GREATER_OP      reduce using rule 53 (expression_op -> expression MUL_OP expression .)
+    LESSER_OP       reduce using rule 53 (expression_op -> expression MUL_OP expression .)
+    EQUALS          reduce using rule 53 (expression_op -> expression MUL_OP expression .)
+    GREATER_OR_EQUALS_OP reduce using rule 53 (expression_op -> expression MUL_OP expression .)
+    LESSER_OR_EQUALS_OP reduce using rule 53 (expression_op -> expression MUL_OP expression .)
+    NOT_EQUALS      reduce using rule 53 (expression_op -> expression MUL_OP expression .)
+    -               reduce using rule 53 (expression_op -> expression MUL_OP expression .)
+    )               reduce using rule 53 (expression_op -> expression MUL_OP expression .)
+    SUB_OP          shift and go to state 40
+    DIV_OP          shift and go to state 37
+
+  ! SUB_OP          [ reduce using rule 53 (expression_op -> expression MUL_OP expression .) ]
+  ! DIV_OP          [ reduce using rule 53 (expression_op -> expression MUL_OP expression .) ]
+  ! ADD_OP          [ shift and go to state 39 ]
+  ! MUL_OP          [ shift and go to state 36 ]
 
 
 state 70
-
-    (57) expression -> ( expression ) .
-
-    -               reduce using rule 57 (expression -> ( expression ) .)
-    ADD_OP          reduce using rule 57 (expression -> ( expression ) .)
-    SUB_OP          reduce using rule 57 (expression -> ( expression ) .)
-    MUL_OP          reduce using rule 57 (expression -> ( expression ) .)
-    DIV_OP          reduce using rule 57 (expression -> ( expression ) .)
-    )               reduce using rule 57 (expression -> ( expression ) .)
-    GREATER_OP      reduce using rule 57 (expression -> ( expression ) .)
-    LESSER_OP       reduce using rule 57 (expression -> ( expression ) .)
-    EQUALS          reduce using rule 57 (expression -> ( expression ) .)
-    GREATER_OR_EQUALS_OP reduce using rule 57 (expression -> ( expression ) .)
-    LESSER_OR_EQUALS_OP reduce using rule 57 (expression -> ( expression ) .)
-    NOT_EQUALS      reduce using rule 57 (expression -> ( expression ) .)
-
-
-state 71
-
-    (42) initialization_string -> STRING IDENTIFIER AFFECTATION . TEXT
-
-    TEXT            shift and go to state 93
-
-
-state 72
-
-    (16) bloc -> OPEN_BRACE program . CLOSE_BRACE
-
-    CLOSE_BRACE     shift and go to state 94
-
-
-state 73
 
     (54) expression_op -> expression DIV_OP expression .
     (51) expression_op -> expression . ADD_OP expression
@@ -1565,23 +1551,50 @@ state 73
     ADD_OP          reduce using rule 54 (expression_op -> expression DIV_OP expression .)
     MUL_OP          reduce using rule 54 (expression_op -> expression DIV_OP expression .)
     DIV_OP          reduce using rule 54 (expression_op -> expression DIV_OP expression .)
-    -               reduce using rule 54 (expression_op -> expression DIV_OP expression .)
-    )               reduce using rule 54 (expression_op -> expression DIV_OP expression .)
     GREATER_OP      reduce using rule 54 (expression_op -> expression DIV_OP expression .)
     LESSER_OP       reduce using rule 54 (expression_op -> expression DIV_OP expression .)
     EQUALS          reduce using rule 54 (expression_op -> expression DIV_OP expression .)
     GREATER_OR_EQUALS_OP reduce using rule 54 (expression_op -> expression DIV_OP expression .)
     LESSER_OR_EQUALS_OP reduce using rule 54 (expression_op -> expression DIV_OP expression .)
     NOT_EQUALS      reduce using rule 54 (expression_op -> expression DIV_OP expression .)
-    SUB_OP          shift and go to state 46
+    -               reduce using rule 54 (expression_op -> expression DIV_OP expression .)
+    )               reduce using rule 54 (expression_op -> expression DIV_OP expression .)
+    SUB_OP          shift and go to state 40
 
   ! SUB_OP          [ reduce using rule 54 (expression_op -> expression DIV_OP expression .) ]
-  ! ADD_OP          [ shift and go to state 47 ]
-  ! MUL_OP          [ shift and go to state 48 ]
-  ! DIV_OP          [ shift and go to state 45 ]
+  ! ADD_OP          [ shift and go to state 39 ]
+  ! MUL_OP          [ shift and go to state 36 ]
+  ! DIV_OP          [ shift and go to state 37 ]
 
 
-state 74
+state 71
+
+    (51) expression_op -> expression ADD_OP expression .
+    (51) expression_op -> expression . ADD_OP expression
+    (52) expression_op -> expression . SUB_OP expression
+    (53) expression_op -> expression . MUL_OP expression
+    (54) expression_op -> expression . DIV_OP expression
+
+    ADD_OP          reduce using rule 51 (expression_op -> expression ADD_OP expression .)
+    GREATER_OP      reduce using rule 51 (expression_op -> expression ADD_OP expression .)
+    LESSER_OP       reduce using rule 51 (expression_op -> expression ADD_OP expression .)
+    EQUALS          reduce using rule 51 (expression_op -> expression ADD_OP expression .)
+    GREATER_OR_EQUALS_OP reduce using rule 51 (expression_op -> expression ADD_OP expression .)
+    LESSER_OR_EQUALS_OP reduce using rule 51 (expression_op -> expression ADD_OP expression .)
+    NOT_EQUALS      reduce using rule 51 (expression_op -> expression ADD_OP expression .)
+    -               reduce using rule 51 (expression_op -> expression ADD_OP expression .)
+    )               reduce using rule 51 (expression_op -> expression ADD_OP expression .)
+    SUB_OP          shift and go to state 40
+    MUL_OP          shift and go to state 36
+    DIV_OP          shift and go to state 37
+
+  ! SUB_OP          [ reduce using rule 51 (expression_op -> expression ADD_OP expression .) ]
+  ! MUL_OP          [ reduce using rule 51 (expression_op -> expression ADD_OP expression .) ]
+  ! DIV_OP          [ reduce using rule 51 (expression_op -> expression ADD_OP expression .) ]
+  ! ADD_OP          [ shift and go to state 39 ]
+
+
+state 72
 
     (52) expression_op -> expression SUB_OP expression .
     (51) expression_op -> expression . ADD_OP expression
@@ -1593,76 +1606,44 @@ state 74
     SUB_OP          reduce using rule 52 (expression_op -> expression SUB_OP expression .)
     MUL_OP          reduce using rule 52 (expression_op -> expression SUB_OP expression .)
     DIV_OP          reduce using rule 52 (expression_op -> expression SUB_OP expression .)
-    -               reduce using rule 52 (expression_op -> expression SUB_OP expression .)
-    )               reduce using rule 52 (expression_op -> expression SUB_OP expression .)
     GREATER_OP      reduce using rule 52 (expression_op -> expression SUB_OP expression .)
     LESSER_OP       reduce using rule 52 (expression_op -> expression SUB_OP expression .)
     EQUALS          reduce using rule 52 (expression_op -> expression SUB_OP expression .)
     GREATER_OR_EQUALS_OP reduce using rule 52 (expression_op -> expression SUB_OP expression .)
     LESSER_OR_EQUALS_OP reduce using rule 52 (expression_op -> expression SUB_OP expression .)
     NOT_EQUALS      reduce using rule 52 (expression_op -> expression SUB_OP expression .)
+    -               reduce using rule 52 (expression_op -> expression SUB_OP expression .)
+    )               reduce using rule 52 (expression_op -> expression SUB_OP expression .)
 
-  ! ADD_OP          [ shift and go to state 47 ]
-  ! SUB_OP          [ shift and go to state 46 ]
-  ! MUL_OP          [ shift and go to state 48 ]
-  ! DIV_OP          [ shift and go to state 45 ]
+  ! ADD_OP          [ shift and go to state 39 ]
+  ! SUB_OP          [ shift and go to state 40 ]
+  ! MUL_OP          [ shift and go to state 36 ]
+  ! DIV_OP          [ shift and go to state 37 ]
+
+
+state 73
+
+    (46) assignation -> IDENTIFIER AFFECTATION expression .
+    (51) expression_op -> expression . ADD_OP expression
+    (52) expression_op -> expression . SUB_OP expression
+    (53) expression_op -> expression . MUL_OP expression
+    (54) expression_op -> expression . DIV_OP expression
+
+    -               reduce using rule 46 (assignation -> IDENTIFIER AFFECTATION expression .)
+    ADD_OP          shift and go to state 39
+    SUB_OP          shift and go to state 40
+    MUL_OP          shift and go to state 36
+    DIV_OP          shift and go to state 37
+
+
+state 74
+
+    (26) whileloop -> WHILE ( comparison . )
+
+    )               shift and go to state 91
 
 
 state 75
-
-    (51) expression_op -> expression ADD_OP expression .
-    (51) expression_op -> expression . ADD_OP expression
-    (52) expression_op -> expression . SUB_OP expression
-    (53) expression_op -> expression . MUL_OP expression
-    (54) expression_op -> expression . DIV_OP expression
-
-    ADD_OP          reduce using rule 51 (expression_op -> expression ADD_OP expression .)
-    -               reduce using rule 51 (expression_op -> expression ADD_OP expression .)
-    )               reduce using rule 51 (expression_op -> expression ADD_OP expression .)
-    GREATER_OP      reduce using rule 51 (expression_op -> expression ADD_OP expression .)
-    LESSER_OP       reduce using rule 51 (expression_op -> expression ADD_OP expression .)
-    EQUALS          reduce using rule 51 (expression_op -> expression ADD_OP expression .)
-    GREATER_OR_EQUALS_OP reduce using rule 51 (expression_op -> expression ADD_OP expression .)
-    LESSER_OR_EQUALS_OP reduce using rule 51 (expression_op -> expression ADD_OP expression .)
-    NOT_EQUALS      reduce using rule 51 (expression_op -> expression ADD_OP expression .)
-    SUB_OP          shift and go to state 46
-    MUL_OP          shift and go to state 48
-    DIV_OP          shift and go to state 45
-
-  ! SUB_OP          [ reduce using rule 51 (expression_op -> expression ADD_OP expression .) ]
-  ! MUL_OP          [ reduce using rule 51 (expression_op -> expression ADD_OP expression .) ]
-  ! DIV_OP          [ reduce using rule 51 (expression_op -> expression ADD_OP expression .) ]
-  ! ADD_OP          [ shift and go to state 47 ]
-
-
-state 76
-
-    (53) expression_op -> expression MUL_OP expression .
-    (51) expression_op -> expression . ADD_OP expression
-    (52) expression_op -> expression . SUB_OP expression
-    (53) expression_op -> expression . MUL_OP expression
-    (54) expression_op -> expression . DIV_OP expression
-
-    ADD_OP          reduce using rule 53 (expression_op -> expression MUL_OP expression .)
-    MUL_OP          reduce using rule 53 (expression_op -> expression MUL_OP expression .)
-    -               reduce using rule 53 (expression_op -> expression MUL_OP expression .)
-    )               reduce using rule 53 (expression_op -> expression MUL_OP expression .)
-    GREATER_OP      reduce using rule 53 (expression_op -> expression MUL_OP expression .)
-    LESSER_OP       reduce using rule 53 (expression_op -> expression MUL_OP expression .)
-    EQUALS          reduce using rule 53 (expression_op -> expression MUL_OP expression .)
-    GREATER_OR_EQUALS_OP reduce using rule 53 (expression_op -> expression MUL_OP expression .)
-    LESSER_OR_EQUALS_OP reduce using rule 53 (expression_op -> expression MUL_OP expression .)
-    NOT_EQUALS      reduce using rule 53 (expression_op -> expression MUL_OP expression .)
-    SUB_OP          shift and go to state 46
-    DIV_OP          shift and go to state 45
-
-  ! SUB_OP          [ reduce using rule 53 (expression_op -> expression MUL_OP expression .) ]
-  ! DIV_OP          [ reduce using rule 53 (expression_op -> expression MUL_OP expression .) ]
-  ! ADD_OP          [ shift and go to state 47 ]
-  ! MUL_OP          [ shift and go to state 48 ]
-
-
-state 77
 
     (34) comparison -> expression . comparison_operator expression
     (51) expression_op -> expression . ADD_OP expression
@@ -1676,111 +1657,46 @@ state 77
     (32) comparison_operator -> . LESSER_OR_EQUALS_OP
     (33) comparison_operator -> . NOT_EQUALS
 
-    ADD_OP          shift and go to state 47
-    SUB_OP          shift and go to state 46
-    MUL_OP          shift and go to state 48
-    DIV_OP          shift and go to state 45
-    GREATER_OP      shift and go to state 96
-    LESSER_OP       shift and go to state 101
-    EQUALS          shift and go to state 100
-    GREATER_OR_EQUALS_OP shift and go to state 95
-    LESSER_OR_EQUALS_OP shift and go to state 97
-    NOT_EQUALS      shift and go to state 99
+    ADD_OP          shift and go to state 39
+    SUB_OP          shift and go to state 40
+    MUL_OP          shift and go to state 36
+    DIV_OP          shift and go to state 37
+    GREATER_OP      shift and go to state 95
+    LESSER_OP       shift and go to state 92
+    EQUALS          shift and go to state 96
+    GREATER_OR_EQUALS_OP shift and go to state 98
+    LESSER_OR_EQUALS_OP shift and go to state 93
+    NOT_EQUALS      shift and go to state 97
 
-    comparison_operator            shift and go to state 98
+    comparison_operator            shift and go to state 94
 
-state 78
-
-    (26) whileloop -> WHILE ( comparison . )
-
-    )               shift and go to state 102
-
-
-state 79
-
-    (38) initialization_num -> FLOAT IDENTIFIER AFFECTATION . NUMBER
-    (39) initialization_num -> FLOAT IDENTIFIER AFFECTATION . IDENTIFIER
-
-    NUMBER          shift and go to state 103
-    IDENTIFIER      shift and go to state 104
-
-
-state 80
-
-    (21) forloop -> FOR ( initialization . - comparison - expression )
-
-    -               shift and go to state 105
-
-
-state 81
+state 76
 
     (43) initialization_bool -> BOOLEAN IDENTIFIER AFFECTATION . TRUE
     (44) initialization_bool -> BOOLEAN IDENTIFIER AFFECTATION . FALSE
     (45) initialization_bool -> BOOLEAN IDENTIFIER AFFECTATION . IDENTIFIER
 
-    TRUE            shift and go to state 106
-    FALSE           shift and go to state 107
-    IDENTIFIER      shift and go to state 108
+    TRUE            shift and go to state 101
+    FALSE           shift and go to state 100
+    IDENTIFIER      shift and go to state 99
 
 
-state 82
-
-    (27) if -> IF ( comparison . )
-
-    )               shift and go to state 109
-
-
-state 83
+state 77
 
     (22) forloop -> FORNEG ( initialization . - NUMBER )
     (23) forloop -> FORNEG ( initialization . - IDENTIFIER )
 
-    -               shift and go to state 110
+    -               shift and go to state 102
 
 
-state 84
+state 78
 
-    (46) assignation -> IDENTIFIER AFFECTATION expression .
-    (51) expression_op -> expression . ADD_OP expression
-    (52) expression_op -> expression . SUB_OP expression
-    (53) expression_op -> expression . MUL_OP expression
-    (54) expression_op -> expression . DIV_OP expression
+    (42) initialization_string -> STRING IDENTIFIER AFFECTATION . TEXT
 
-    -               reduce using rule 46 (assignation -> IDENTIFIER AFFECTATION expression .)
-    ADD_OP          shift and go to state 47
-    SUB_OP          shift and go to state 46
-    MUL_OP          shift and go to state 48
-    DIV_OP          shift and go to state 45
+    TEXT            shift and go to state 103
 
 
-state 85
-
-    (13) statement -> PRINTERR TEXT - .
-
-    PRINT           reduce using rule 13 (statement -> PRINTERR TEXT - .)
-    PRINTERR        reduce using rule 13 (statement -> PRINTERR TEXT - .)
-    BREAK           reduce using rule 13 (statement -> PRINTERR TEXT - .)
-    (               reduce using rule 13 (statement -> PRINTERR TEXT - .)
-    IDENTIFIER      reduce using rule 13 (statement -> PRINTERR TEXT - .)
-    NUMBER          reduce using rule 13 (statement -> PRINTERR TEXT - .)
-    ADD_OP          reduce using rule 13 (statement -> PRINTERR TEXT - .)
-    SUB_OP          reduce using rule 13 (statement -> PRINTERR TEXT - .)
-    INCR_OP         reduce using rule 13 (statement -> PRINTERR TEXT - .)
-    DECR_OP         reduce using rule 13 (statement -> PRINTERR TEXT - .)
-    WHILE           reduce using rule 13 (statement -> PRINTERR TEXT - .)
-    FOR             reduce using rule 13 (statement -> PRINTERR TEXT - .)
-    FORNEG          reduce using rule 13 (statement -> PRINTERR TEXT - .)
-    FORPOS          reduce using rule 13 (statement -> PRINTERR TEXT - .)
-    IF              reduce using rule 13 (statement -> PRINTERR TEXT - .)
-    FLOAT           reduce using rule 13 (statement -> PRINTERR TEXT - .)
-    INT             reduce using rule 13 (statement -> PRINTERR TEXT - .)
-    STRING          reduce using rule 13 (statement -> PRINTERR TEXT - .)
-    BOOLEAN         reduce using rule 13 (statement -> PRINTERR TEXT - .)
-    $end            reduce using rule 13 (statement -> PRINTERR TEXT - .)
-    CLOSE_BRACE     reduce using rule 13 (statement -> PRINTERR TEXT - .)
-
-
-state 86
+state 79
 
     (14) statement -> PRINTERR IDENTIFIER - .
 
@@ -1807,51 +1723,72 @@ state 86
     CLOSE_BRACE     reduce using rule 14 (statement -> PRINTERR IDENTIFIER - .)
 
 
-state 87
+state 80
+
+    (13) statement -> PRINTERR TEXT - .
+
+    PRINT           reduce using rule 13 (statement -> PRINTERR TEXT - .)
+    PRINTERR        reduce using rule 13 (statement -> PRINTERR TEXT - .)
+    BREAK           reduce using rule 13 (statement -> PRINTERR TEXT - .)
+    (               reduce using rule 13 (statement -> PRINTERR TEXT - .)
+    IDENTIFIER      reduce using rule 13 (statement -> PRINTERR TEXT - .)
+    NUMBER          reduce using rule 13 (statement -> PRINTERR TEXT - .)
+    ADD_OP          reduce using rule 13 (statement -> PRINTERR TEXT - .)
+    SUB_OP          reduce using rule 13 (statement -> PRINTERR TEXT - .)
+    INCR_OP         reduce using rule 13 (statement -> PRINTERR TEXT - .)
+    DECR_OP         reduce using rule 13 (statement -> PRINTERR TEXT - .)
+    WHILE           reduce using rule 13 (statement -> PRINTERR TEXT - .)
+    FOR             reduce using rule 13 (statement -> PRINTERR TEXT - .)
+    FORNEG          reduce using rule 13 (statement -> PRINTERR TEXT - .)
+    FORPOS          reduce using rule 13 (statement -> PRINTERR TEXT - .)
+    IF              reduce using rule 13 (statement -> PRINTERR TEXT - .)
+    FLOAT           reduce using rule 13 (statement -> PRINTERR TEXT - .)
+    INT             reduce using rule 13 (statement -> PRINTERR TEXT - .)
+    STRING          reduce using rule 13 (statement -> PRINTERR TEXT - .)
+    BOOLEAN         reduce using rule 13 (statement -> PRINTERR TEXT - .)
+    $end            reduce using rule 13 (statement -> PRINTERR TEXT - .)
+    CLOSE_BRACE     reduce using rule 13 (statement -> PRINTERR TEXT - .)
+
+
+state 81
+
+    (16) bloc -> OPEN_BRACE program . CLOSE_BRACE
+
+    CLOSE_BRACE     shift and go to state 104
+
+
+state 82
+
+    (27) if -> IF ( comparison . )
+
+    )               shift and go to state 105
+
+
+state 83
+
+    (21) forloop -> FOR ( initialization . - comparison - expression )
+
+    -               shift and go to state 106
+
+
+state 84
+
+    (40) initialization_num -> INT IDENTIFIER AFFECTATION . NUMBER
+    (41) initialization_num -> INT IDENTIFIER AFFECTATION . IDENTIFIER
+
+    NUMBER          shift and go to state 108
+    IDENTIFIER      shift and go to state 107
+
+
+state 85
 
     (24) forloop -> FORPOS ( initialization . - NUMBER )
     (25) forloop -> FORPOS ( initialization . - IDENTIFIER )
 
-    -               shift and go to state 111
+    -               shift and go to state 109
 
 
-state 88
-
-    (20) structure -> if bloc ELSE . bloc
-    (16) bloc -> . OPEN_BRACE program CLOSE_BRACE
-
-    OPEN_BRACE      shift and go to state 43
-
-    bloc                           shift and go to state 112
-
-state 89
-
-    (11) statement -> PRINT TEXT - .
-
-    PRINT           reduce using rule 11 (statement -> PRINT TEXT - .)
-    PRINTERR        reduce using rule 11 (statement -> PRINT TEXT - .)
-    BREAK           reduce using rule 11 (statement -> PRINT TEXT - .)
-    (               reduce using rule 11 (statement -> PRINT TEXT - .)
-    IDENTIFIER      reduce using rule 11 (statement -> PRINT TEXT - .)
-    NUMBER          reduce using rule 11 (statement -> PRINT TEXT - .)
-    ADD_OP          reduce using rule 11 (statement -> PRINT TEXT - .)
-    SUB_OP          reduce using rule 11 (statement -> PRINT TEXT - .)
-    INCR_OP         reduce using rule 11 (statement -> PRINT TEXT - .)
-    DECR_OP         reduce using rule 11 (statement -> PRINT TEXT - .)
-    WHILE           reduce using rule 11 (statement -> PRINT TEXT - .)
-    FOR             reduce using rule 11 (statement -> PRINT TEXT - .)
-    FORNEG          reduce using rule 11 (statement -> PRINT TEXT - .)
-    FORPOS          reduce using rule 11 (statement -> PRINT TEXT - .)
-    IF              reduce using rule 11 (statement -> PRINT TEXT - .)
-    FLOAT           reduce using rule 11 (statement -> PRINT TEXT - .)
-    INT             reduce using rule 11 (statement -> PRINT TEXT - .)
-    STRING          reduce using rule 11 (statement -> PRINT TEXT - .)
-    BOOLEAN         reduce using rule 11 (statement -> PRINT TEXT - .)
-    $end            reduce using rule 11 (statement -> PRINT TEXT - .)
-    CLOSE_BRACE     reduce using rule 11 (statement -> PRINT TEXT - .)
-
-
-state 90
+state 86
 
     (12) statement -> PRINT IDENTIFIER - .
 
@@ -1878,28 +1815,225 @@ state 90
     CLOSE_BRACE     reduce using rule 12 (statement -> PRINT IDENTIFIER - .)
 
 
+state 87
+
+    (11) statement -> PRINT TEXT - .
+
+    PRINT           reduce using rule 11 (statement -> PRINT TEXT - .)
+    PRINTERR        reduce using rule 11 (statement -> PRINT TEXT - .)
+    BREAK           reduce using rule 11 (statement -> PRINT TEXT - .)
+    (               reduce using rule 11 (statement -> PRINT TEXT - .)
+    IDENTIFIER      reduce using rule 11 (statement -> PRINT TEXT - .)
+    NUMBER          reduce using rule 11 (statement -> PRINT TEXT - .)
+    ADD_OP          reduce using rule 11 (statement -> PRINT TEXT - .)
+    SUB_OP          reduce using rule 11 (statement -> PRINT TEXT - .)
+    INCR_OP         reduce using rule 11 (statement -> PRINT TEXT - .)
+    DECR_OP         reduce using rule 11 (statement -> PRINT TEXT - .)
+    WHILE           reduce using rule 11 (statement -> PRINT TEXT - .)
+    FOR             reduce using rule 11 (statement -> PRINT TEXT - .)
+    FORNEG          reduce using rule 11 (statement -> PRINT TEXT - .)
+    FORPOS          reduce using rule 11 (statement -> PRINT TEXT - .)
+    IF              reduce using rule 11 (statement -> PRINT TEXT - .)
+    FLOAT           reduce using rule 11 (statement -> PRINT TEXT - .)
+    INT             reduce using rule 11 (statement -> PRINT TEXT - .)
+    STRING          reduce using rule 11 (statement -> PRINT TEXT - .)
+    BOOLEAN         reduce using rule 11 (statement -> PRINT TEXT - .)
+    $end            reduce using rule 11 (statement -> PRINT TEXT - .)
+    CLOSE_BRACE     reduce using rule 11 (statement -> PRINT TEXT - .)
+
+
+state 88
+
+    (38) initialization_num -> FLOAT IDENTIFIER AFFECTATION . NUMBER
+    (39) initialization_num -> FLOAT IDENTIFIER AFFECTATION . IDENTIFIER
+
+    NUMBER          shift and go to state 111
+    IDENTIFIER      shift and go to state 110
+
+
+state 89
+
+    (20) structure -> if bloc ELSE . bloc
+    (16) bloc -> . OPEN_BRACE program CLOSE_BRACE
+
+    OPEN_BRACE      shift and go to state 52
+
+    bloc                           shift and go to state 112
+
+state 90
+
+    (57) expression -> ( expression ) .
+
+    -               reduce using rule 57 (expression -> ( expression ) .)
+    ADD_OP          reduce using rule 57 (expression -> ( expression ) .)
+    SUB_OP          reduce using rule 57 (expression -> ( expression ) .)
+    MUL_OP          reduce using rule 57 (expression -> ( expression ) .)
+    DIV_OP          reduce using rule 57 (expression -> ( expression ) .)
+    )               reduce using rule 57 (expression -> ( expression ) .)
+    GREATER_OP      reduce using rule 57 (expression -> ( expression ) .)
+    LESSER_OP       reduce using rule 57 (expression -> ( expression ) .)
+    EQUALS          reduce using rule 57 (expression -> ( expression ) .)
+    GREATER_OR_EQUALS_OP reduce using rule 57 (expression -> ( expression ) .)
+    LESSER_OR_EQUALS_OP reduce using rule 57 (expression -> ( expression ) .)
+    NOT_EQUALS      reduce using rule 57 (expression -> ( expression ) .)
+
+
 state 91
 
-    (40) initialization_num -> INT IDENTIFIER AFFECTATION NUMBER .
+    (26) whileloop -> WHILE ( comparison ) .
 
-    -               reduce using rule 40 (initialization_num -> INT IDENTIFIER AFFECTATION NUMBER .)
+    OPEN_BRACE      reduce using rule 26 (whileloop -> WHILE ( comparison ) .)
 
 
 state 92
 
-    (41) initialization_num -> INT IDENTIFIER AFFECTATION IDENTIFIER .
+    (29) comparison_operator -> LESSER_OP .
 
-    -               reduce using rule 41 (initialization_num -> INT IDENTIFIER AFFECTATION IDENTIFIER .)
+    (               reduce using rule 29 (comparison_operator -> LESSER_OP .)
+    NUMBER          reduce using rule 29 (comparison_operator -> LESSER_OP .)
+    IDENTIFIER      reduce using rule 29 (comparison_operator -> LESSER_OP .)
+    ADD_OP          reduce using rule 29 (comparison_operator -> LESSER_OP .)
+    SUB_OP          reduce using rule 29 (comparison_operator -> LESSER_OP .)
+    INCR_OP         reduce using rule 29 (comparison_operator -> LESSER_OP .)
+    DECR_OP         reduce using rule 29 (comparison_operator -> LESSER_OP .)
 
 
 state 93
+
+    (32) comparison_operator -> LESSER_OR_EQUALS_OP .
+
+    (               reduce using rule 32 (comparison_operator -> LESSER_OR_EQUALS_OP .)
+    NUMBER          reduce using rule 32 (comparison_operator -> LESSER_OR_EQUALS_OP .)
+    IDENTIFIER      reduce using rule 32 (comparison_operator -> LESSER_OR_EQUALS_OP .)
+    ADD_OP          reduce using rule 32 (comparison_operator -> LESSER_OR_EQUALS_OP .)
+    SUB_OP          reduce using rule 32 (comparison_operator -> LESSER_OR_EQUALS_OP .)
+    INCR_OP         reduce using rule 32 (comparison_operator -> LESSER_OR_EQUALS_OP .)
+    DECR_OP         reduce using rule 32 (comparison_operator -> LESSER_OR_EQUALS_OP .)
+
+
+state 94
+
+    (34) comparison -> expression comparison_operator . expression
+    (3) expression -> . expression_num
+    (4) expression -> . expression_sign
+    (5) expression -> . expression_op
+    (6) expression -> . expression_incr
+    (57) expression -> . ( expression )
+    (47) expression_num -> . NUMBER
+    (48) expression_num -> . IDENTIFIER
+    (49) expression_sign -> . ADD_OP expression
+    (50) expression_sign -> . SUB_OP expression
+    (51) expression_op -> . expression ADD_OP expression
+    (52) expression_op -> . expression SUB_OP expression
+    (53) expression_op -> . expression MUL_OP expression
+    (54) expression_op -> . expression DIV_OP expression
+    (55) expression_incr -> . INCR_OP IDENTIFIER
+    (56) expression_incr -> . DECR_OP IDENTIFIER
+
+    (               shift and go to state 31
+    NUMBER          shift and go to state 1
+    IDENTIFIER      shift and go to state 49
+    ADD_OP          shift and go to state 11
+    SUB_OP          shift and go to state 29
+    INCR_OP         shift and go to state 4
+    DECR_OP         shift and go to state 16
+
+    expression_sign                shift and go to state 33
+    expression_num                 shift and go to state 20
+    expression_incr                shift and go to state 30
+    expression_op                  shift and go to state 19
+    expression                     shift and go to state 113
+
+state 95
+
+    (28) comparison_operator -> GREATER_OP .
+
+    (               reduce using rule 28 (comparison_operator -> GREATER_OP .)
+    NUMBER          reduce using rule 28 (comparison_operator -> GREATER_OP .)
+    IDENTIFIER      reduce using rule 28 (comparison_operator -> GREATER_OP .)
+    ADD_OP          reduce using rule 28 (comparison_operator -> GREATER_OP .)
+    SUB_OP          reduce using rule 28 (comparison_operator -> GREATER_OP .)
+    INCR_OP         reduce using rule 28 (comparison_operator -> GREATER_OP .)
+    DECR_OP         reduce using rule 28 (comparison_operator -> GREATER_OP .)
+
+
+state 96
+
+    (30) comparison_operator -> EQUALS .
+
+    (               reduce using rule 30 (comparison_operator -> EQUALS .)
+    NUMBER          reduce using rule 30 (comparison_operator -> EQUALS .)
+    IDENTIFIER      reduce using rule 30 (comparison_operator -> EQUALS .)
+    ADD_OP          reduce using rule 30 (comparison_operator -> EQUALS .)
+    SUB_OP          reduce using rule 30 (comparison_operator -> EQUALS .)
+    INCR_OP         reduce using rule 30 (comparison_operator -> EQUALS .)
+    DECR_OP         reduce using rule 30 (comparison_operator -> EQUALS .)
+
+
+state 97
+
+    (33) comparison_operator -> NOT_EQUALS .
+
+    (               reduce using rule 33 (comparison_operator -> NOT_EQUALS .)
+    NUMBER          reduce using rule 33 (comparison_operator -> NOT_EQUALS .)
+    IDENTIFIER      reduce using rule 33 (comparison_operator -> NOT_EQUALS .)
+    ADD_OP          reduce using rule 33 (comparison_operator -> NOT_EQUALS .)
+    SUB_OP          reduce using rule 33 (comparison_operator -> NOT_EQUALS .)
+    INCR_OP         reduce using rule 33 (comparison_operator -> NOT_EQUALS .)
+    DECR_OP         reduce using rule 33 (comparison_operator -> NOT_EQUALS .)
+
+
+state 98
+
+    (31) comparison_operator -> GREATER_OR_EQUALS_OP .
+
+    (               reduce using rule 31 (comparison_operator -> GREATER_OR_EQUALS_OP .)
+    NUMBER          reduce using rule 31 (comparison_operator -> GREATER_OR_EQUALS_OP .)
+    IDENTIFIER      reduce using rule 31 (comparison_operator -> GREATER_OR_EQUALS_OP .)
+    ADD_OP          reduce using rule 31 (comparison_operator -> GREATER_OR_EQUALS_OP .)
+    SUB_OP          reduce using rule 31 (comparison_operator -> GREATER_OR_EQUALS_OP .)
+    INCR_OP         reduce using rule 31 (comparison_operator -> GREATER_OR_EQUALS_OP .)
+    DECR_OP         reduce using rule 31 (comparison_operator -> GREATER_OR_EQUALS_OP .)
+
+
+state 99
+
+    (45) initialization_bool -> BOOLEAN IDENTIFIER AFFECTATION IDENTIFIER .
+
+    -               reduce using rule 45 (initialization_bool -> BOOLEAN IDENTIFIER AFFECTATION IDENTIFIER .)
+
+
+state 100
+
+    (44) initialization_bool -> BOOLEAN IDENTIFIER AFFECTATION FALSE .
+
+    -               reduce using rule 44 (initialization_bool -> BOOLEAN IDENTIFIER AFFECTATION FALSE .)
+
+
+state 101
+
+    (43) initialization_bool -> BOOLEAN IDENTIFIER AFFECTATION TRUE .
+
+    -               reduce using rule 43 (initialization_bool -> BOOLEAN IDENTIFIER AFFECTATION TRUE .)
+
+
+state 102
+
+    (22) forloop -> FORNEG ( initialization - . NUMBER )
+    (23) forloop -> FORNEG ( initialization - . IDENTIFIER )
+
+    NUMBER          shift and go to state 115
+    IDENTIFIER      shift and go to state 114
+
+
+state 103
 
     (42) initialization_string -> STRING IDENTIFIER AFFECTATION TEXT .
 
     -               reduce using rule 42 (initialization_string -> STRING IDENTIFIER AFFECTATION TEXT .)
 
 
-state 94
+state 104
 
     (16) bloc -> OPEN_BRACE program CLOSE_BRACE .
 
@@ -1927,139 +2061,14 @@ state 94
     ELSE            reduce using rule 16 (bloc -> OPEN_BRACE program CLOSE_BRACE .)
 
 
-state 95
-
-    (31) comparison_operator -> GREATER_OR_EQUALS_OP .
-
-    (               reduce using rule 31 (comparison_operator -> GREATER_OR_EQUALS_OP .)
-    NUMBER          reduce using rule 31 (comparison_operator -> GREATER_OR_EQUALS_OP .)
-    IDENTIFIER      reduce using rule 31 (comparison_operator -> GREATER_OR_EQUALS_OP .)
-    ADD_OP          reduce using rule 31 (comparison_operator -> GREATER_OR_EQUALS_OP .)
-    SUB_OP          reduce using rule 31 (comparison_operator -> GREATER_OR_EQUALS_OP .)
-    INCR_OP         reduce using rule 31 (comparison_operator -> GREATER_OR_EQUALS_OP .)
-    DECR_OP         reduce using rule 31 (comparison_operator -> GREATER_OR_EQUALS_OP .)
-
-
-state 96
-
-    (28) comparison_operator -> GREATER_OP .
-
-    (               reduce using rule 28 (comparison_operator -> GREATER_OP .)
-    NUMBER          reduce using rule 28 (comparison_operator -> GREATER_OP .)
-    IDENTIFIER      reduce using rule 28 (comparison_operator -> GREATER_OP .)
-    ADD_OP          reduce using rule 28 (comparison_operator -> GREATER_OP .)
-    SUB_OP          reduce using rule 28 (comparison_operator -> GREATER_OP .)
-    INCR_OP         reduce using rule 28 (comparison_operator -> GREATER_OP .)
-    DECR_OP         reduce using rule 28 (comparison_operator -> GREATER_OP .)
-
-
-state 97
-
-    (32) comparison_operator -> LESSER_OR_EQUALS_OP .
-
-    (               reduce using rule 32 (comparison_operator -> LESSER_OR_EQUALS_OP .)
-    NUMBER          reduce using rule 32 (comparison_operator -> LESSER_OR_EQUALS_OP .)
-    IDENTIFIER      reduce using rule 32 (comparison_operator -> LESSER_OR_EQUALS_OP .)
-    ADD_OP          reduce using rule 32 (comparison_operator -> LESSER_OR_EQUALS_OP .)
-    SUB_OP          reduce using rule 32 (comparison_operator -> LESSER_OR_EQUALS_OP .)
-    INCR_OP         reduce using rule 32 (comparison_operator -> LESSER_OR_EQUALS_OP .)
-    DECR_OP         reduce using rule 32 (comparison_operator -> LESSER_OR_EQUALS_OP .)
-
-
-state 98
-
-    (34) comparison -> expression comparison_operator . expression
-    (3) expression -> . expression_num
-    (4) expression -> . expression_sign
-    (5) expression -> . expression_op
-    (6) expression -> . expression_incr
-    (57) expression -> . ( expression )
-    (47) expression_num -> . NUMBER
-    (48) expression_num -> . IDENTIFIER
-    (49) expression_sign -> . ADD_OP expression
-    (50) expression_sign -> . SUB_OP expression
-    (51) expression_op -> . expression ADD_OP expression
-    (52) expression_op -> . expression SUB_OP expression
-    (53) expression_op -> . expression MUL_OP expression
-    (54) expression_op -> . expression DIV_OP expression
-    (55) expression_incr -> . INCR_OP IDENTIFIER
-    (56) expression_incr -> . DECR_OP IDENTIFIER
-
-    (               shift and go to state 7
-    NUMBER          shift and go to state 28
-    IDENTIFIER      shift and go to state 39
-    ADD_OP          shift and go to state 19
-    SUB_OP          shift and go to state 25
-    INCR_OP         shift and go to state 14
-    DECR_OP         shift and go to state 21
-
-    expression_op                  shift and go to state 22
-    expression                     shift and go to state 113
-    expression_incr                shift and go to state 11
-    expression_num                 shift and go to state 2
-    expression_sign                shift and go to state 32
-
-state 99
-
-    (33) comparison_operator -> NOT_EQUALS .
-
-    (               reduce using rule 33 (comparison_operator -> NOT_EQUALS .)
-    NUMBER          reduce using rule 33 (comparison_operator -> NOT_EQUALS .)
-    IDENTIFIER      reduce using rule 33 (comparison_operator -> NOT_EQUALS .)
-    ADD_OP          reduce using rule 33 (comparison_operator -> NOT_EQUALS .)
-    SUB_OP          reduce using rule 33 (comparison_operator -> NOT_EQUALS .)
-    INCR_OP         reduce using rule 33 (comparison_operator -> NOT_EQUALS .)
-    DECR_OP         reduce using rule 33 (comparison_operator -> NOT_EQUALS .)
-
-
-state 100
-
-    (30) comparison_operator -> EQUALS .
-
-    (               reduce using rule 30 (comparison_operator -> EQUALS .)
-    NUMBER          reduce using rule 30 (comparison_operator -> EQUALS .)
-    IDENTIFIER      reduce using rule 30 (comparison_operator -> EQUALS .)
-    ADD_OP          reduce using rule 30 (comparison_operator -> EQUALS .)
-    SUB_OP          reduce using rule 30 (comparison_operator -> EQUALS .)
-    INCR_OP         reduce using rule 30 (comparison_operator -> EQUALS .)
-    DECR_OP         reduce using rule 30 (comparison_operator -> EQUALS .)
-
-
-state 101
-
-    (29) comparison_operator -> LESSER_OP .
-
-    (               reduce using rule 29 (comparison_operator -> LESSER_OP .)
-    NUMBER          reduce using rule 29 (comparison_operator -> LESSER_OP .)
-    IDENTIFIER      reduce using rule 29 (comparison_operator -> LESSER_OP .)
-    ADD_OP          reduce using rule 29 (comparison_operator -> LESSER_OP .)
-    SUB_OP          reduce using rule 29 (comparison_operator -> LESSER_OP .)
-    INCR_OP         reduce using rule 29 (comparison_operator -> LESSER_OP .)
-    DECR_OP         reduce using rule 29 (comparison_operator -> LESSER_OP .)
-
-
-state 102
-
-    (26) whileloop -> WHILE ( comparison ) .
-
-    OPEN_BRACE      reduce using rule 26 (whileloop -> WHILE ( comparison ) .)
-
-
-state 103
-
-    (38) initialization_num -> FLOAT IDENTIFIER AFFECTATION NUMBER .
-
-    -               reduce using rule 38 (initialization_num -> FLOAT IDENTIFIER AFFECTATION NUMBER .)
-
-
-state 104
-
-    (39) initialization_num -> FLOAT IDENTIFIER AFFECTATION IDENTIFIER .
-
-    -               reduce using rule 39 (initialization_num -> FLOAT IDENTIFIER AFFECTATION IDENTIFIER .)
-
-
 state 105
+
+    (27) if -> IF ( comparison ) .
+
+    OPEN_BRACE      reduce using rule 27 (if -> IF ( comparison ) .)
+
+
+state 106
 
     (21) forloop -> FOR ( initialization - . comparison - expression )
     (34) comparison -> . expression comparison_operator expression
@@ -2079,65 +2088,56 @@ state 105
     (55) expression_incr -> . INCR_OP IDENTIFIER
     (56) expression_incr -> . DECR_OP IDENTIFIER
 
-    (               shift and go to state 7
-    NUMBER          shift and go to state 28
-    IDENTIFIER      shift and go to state 39
-    ADD_OP          shift and go to state 19
-    SUB_OP          shift and go to state 25
-    INCR_OP         shift and go to state 14
-    DECR_OP         shift and go to state 21
+    (               shift and go to state 31
+    NUMBER          shift and go to state 1
+    IDENTIFIER      shift and go to state 49
+    ADD_OP          shift and go to state 11
+    SUB_OP          shift and go to state 29
+    INCR_OP         shift and go to state 4
+    DECR_OP         shift and go to state 16
 
-    expression_op                  shift and go to state 22
-    expression_sign                shift and go to state 32
-    expression                     shift and go to state 77
-    expression_incr                shift and go to state 11
-    comparison                     shift and go to state 114
-    expression_num                 shift and go to state 2
-
-state 106
-
-    (43) initialization_bool -> BOOLEAN IDENTIFIER AFFECTATION TRUE .
-
-    -               reduce using rule 43 (initialization_bool -> BOOLEAN IDENTIFIER AFFECTATION TRUE .)
-
+    expression_sign                shift and go to state 33
+    expression_num                 shift and go to state 20
+    expression_op                  shift and go to state 19
+    comparison                     shift and go to state 116
+    expression                     shift and go to state 75
+    expression_incr                shift and go to state 30
 
 state 107
 
-    (44) initialization_bool -> BOOLEAN IDENTIFIER AFFECTATION FALSE .
+    (41) initialization_num -> INT IDENTIFIER AFFECTATION IDENTIFIER .
 
-    -               reduce using rule 44 (initialization_bool -> BOOLEAN IDENTIFIER AFFECTATION FALSE .)
+    -               reduce using rule 41 (initialization_num -> INT IDENTIFIER AFFECTATION IDENTIFIER .)
 
 
 state 108
 
-    (45) initialization_bool -> BOOLEAN IDENTIFIER AFFECTATION IDENTIFIER .
+    (40) initialization_num -> INT IDENTIFIER AFFECTATION NUMBER .
 
-    -               reduce using rule 45 (initialization_bool -> BOOLEAN IDENTIFIER AFFECTATION IDENTIFIER .)
+    -               reduce using rule 40 (initialization_num -> INT IDENTIFIER AFFECTATION NUMBER .)
 
 
 state 109
 
-    (27) if -> IF ( comparison ) .
+    (24) forloop -> FORPOS ( initialization - . NUMBER )
+    (25) forloop -> FORPOS ( initialization - . IDENTIFIER )
 
-    OPEN_BRACE      reduce using rule 27 (if -> IF ( comparison ) .)
+    NUMBER          shift and go to state 118
+    IDENTIFIER      shift and go to state 117
 
 
 state 110
 
-    (22) forloop -> FORNEG ( initialization - . NUMBER )
-    (23) forloop -> FORNEG ( initialization - . IDENTIFIER )
+    (39) initialization_num -> FLOAT IDENTIFIER AFFECTATION IDENTIFIER .
 
-    NUMBER          shift and go to state 115
-    IDENTIFIER      shift and go to state 116
+    -               reduce using rule 39 (initialization_num -> FLOAT IDENTIFIER AFFECTATION IDENTIFIER .)
 
 
 state 111
 
-    (24) forloop -> FORPOS ( initialization - . NUMBER )
-    (25) forloop -> FORPOS ( initialization - . IDENTIFIER )
+    (38) initialization_num -> FLOAT IDENTIFIER AFFECTATION NUMBER .
 
-    NUMBER          shift and go to state 117
-    IDENTIFIER      shift and go to state 118
+    -               reduce using rule 38 (initialization_num -> FLOAT IDENTIFIER AFFECTATION NUMBER .)
 
 
 state 112
@@ -2175,19 +2175,19 @@ state 113
     (53) expression_op -> expression . MUL_OP expression
     (54) expression_op -> expression . DIV_OP expression
 
-    )               reduce using rule 34 (comparison -> expression comparison_operator expression .)
     -               reduce using rule 34 (comparison -> expression comparison_operator expression .)
-    ADD_OP          shift and go to state 47
-    SUB_OP          shift and go to state 46
-    MUL_OP          shift and go to state 48
-    DIV_OP          shift and go to state 45
+    )               reduce using rule 34 (comparison -> expression comparison_operator expression .)
+    ADD_OP          shift and go to state 39
+    SUB_OP          shift and go to state 40
+    MUL_OP          shift and go to state 36
+    DIV_OP          shift and go to state 37
 
 
 state 114
 
-    (21) forloop -> FOR ( initialization - comparison . - expression )
+    (23) forloop -> FORNEG ( initialization - IDENTIFIER . )
 
-    -               shift and go to state 119
+    )               shift and go to state 119
 
 
 state 115
@@ -2199,26 +2199,40 @@ state 115
 
 state 116
 
-    (23) forloop -> FORNEG ( initialization - IDENTIFIER . )
+    (21) forloop -> FOR ( initialization - comparison . - expression )
 
-    )               shift and go to state 121
+    -               shift and go to state 121
 
 
 state 117
 
-    (24) forloop -> FORPOS ( initialization - NUMBER . )
+    (25) forloop -> FORPOS ( initialization - IDENTIFIER . )
 
     )               shift and go to state 122
 
 
 state 118
 
-    (25) forloop -> FORPOS ( initialization - IDENTIFIER . )
+    (24) forloop -> FORPOS ( initialization - NUMBER . )
 
     )               shift and go to state 123
 
 
 state 119
+
+    (23) forloop -> FORNEG ( initialization - IDENTIFIER ) .
+
+    OPEN_BRACE      reduce using rule 23 (forloop -> FORNEG ( initialization - IDENTIFIER ) .)
+
+
+state 120
+
+    (22) forloop -> FORNEG ( initialization - NUMBER ) .
+
+    OPEN_BRACE      reduce using rule 22 (forloop -> FORNEG ( initialization - NUMBER ) .)
+
+
+state 121
 
     (21) forloop -> FOR ( initialization - comparison - . expression )
     (3) expression -> . expression_num
@@ -2237,46 +2251,32 @@ state 119
     (55) expression_incr -> . INCR_OP IDENTIFIER
     (56) expression_incr -> . DECR_OP IDENTIFIER
 
-    (               shift and go to state 7
-    NUMBER          shift and go to state 28
-    IDENTIFIER      shift and go to state 39
-    ADD_OP          shift and go to state 19
-    SUB_OP          shift and go to state 25
-    INCR_OP         shift and go to state 14
-    DECR_OP         shift and go to state 21
+    (               shift and go to state 31
+    NUMBER          shift and go to state 1
+    IDENTIFIER      shift and go to state 49
+    ADD_OP          shift and go to state 11
+    SUB_OP          shift and go to state 29
+    INCR_OP         shift and go to state 4
+    DECR_OP         shift and go to state 16
 
-    expression_op                  shift and go to state 22
+    expression_op                  shift and go to state 19
+    expression_num                 shift and go to state 20
+    expression_sign                shift and go to state 33
     expression                     shift and go to state 124
-    expression_num                 shift and go to state 2
-    expression_incr                shift and go to state 11
-    expression_sign                shift and go to state 32
-
-state 120
-
-    (22) forloop -> FORNEG ( initialization - NUMBER ) .
-
-    OPEN_BRACE      reduce using rule 22 (forloop -> FORNEG ( initialization - NUMBER ) .)
-
-
-state 121
-
-    (23) forloop -> FORNEG ( initialization - IDENTIFIER ) .
-
-    OPEN_BRACE      reduce using rule 23 (forloop -> FORNEG ( initialization - IDENTIFIER ) .)
-
+    expression_incr                shift and go to state 30
 
 state 122
-
-    (24) forloop -> FORPOS ( initialization - NUMBER ) .
-
-    OPEN_BRACE      reduce using rule 24 (forloop -> FORPOS ( initialization - NUMBER ) .)
-
-
-state 123
 
     (25) forloop -> FORPOS ( initialization - IDENTIFIER ) .
 
     OPEN_BRACE      reduce using rule 25 (forloop -> FORPOS ( initialization - IDENTIFIER ) .)
+
+
+state 123
+
+    (24) forloop -> FORPOS ( initialization - NUMBER ) .
+
+    OPEN_BRACE      reduce using rule 24 (forloop -> FORPOS ( initialization - NUMBER ) .)
 
 
 state 124
@@ -2288,10 +2288,10 @@ state 124
     (54) expression_op -> expression . DIV_OP expression
 
     )               shift and go to state 125
-    ADD_OP          shift and go to state 47
-    SUB_OP          shift and go to state 46
-    MUL_OP          shift and go to state 48
-    DIV_OP          shift and go to state 45
+    ADD_OP          shift and go to state 39
+    SUB_OP          shift and go to state 40
+    MUL_OP          shift and go to state 36
+    DIV_OP          shift and go to state 37
 
 
 state 125

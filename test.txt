@@ -13,11 +13,13 @@ stuff b is 123432-
 rammus ( a likey 2 )
 tellme
 	a is a moar 3 -
+	omgbbq a-
 coolstorybro
 
-gif(stuff c is 12 - c likey 12 - poncedilate c)
+gif(stuff c is 1 - c pwndby 12 - poncedilate c)
 tellme
 	b is 12 rekts a-
+	omgbbq a-
 coolstorybro
 
 gifpos (stuff c is  12- 15)
