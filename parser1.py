@@ -4,8 +4,6 @@ import AST
 from lex1 import mapStuffzToken as mapStuffzToken
 import re
 
-TODO = 'lol'
-
 def p_program(p):
     """ program : statement
         | statement program """
@@ -81,11 +79,22 @@ def p_for(p):
         p[0] = AST.ForNode([p[3], p[5],p[7]])
     except:
         #untested
+        init = p[3].children[1] #tokennode
+        compOp = None
+        incrOp = None
         p[0] = AST.ForNode([p[3],AST.TokenNode(p[5])])
         if mapStuffzToken.get(p[1]) == 'FORNEG':
             p[0].type = 'forneg'
+            compOp = 'GREATER_OR_EQUALS_OP'
+            incrOp = 'DECR_OP'
         else:
             p[0].type = 'forpos'
+            compOp = 'LESSER_OR_EQUALS_OP'
+            incrOp = 'INCR_OP'
+        print (AST.ComparisonTokenNode(compOp))
+        compNode = AST.ComparisonNode([init, AST.ComparisonTokenNode(compOp), AST.TokenNode(p[5])])
+        expNode = AST.IncrNode([AST.TokenNode(incrOp), init])
+        p[0] = AST.ForNode([p[3],compNode, expNode])
 
 def p_while(p):
     """ whileloop : WHILE '(' comparison ')' """
@@ -106,6 +115,7 @@ def p_comparison_operator(p):
 
 def p_comparison(p):
     """ comparison : expression comparison_operator expression """
+    print(AST.ComparisonTokenNode(p[2]))
     p[0] = AST.ComparisonNode([p[1], AST.ComparisonTokenNode(p[2]), p[3]])
 
 def p_initialization(p):
@@ -173,20 +183,22 @@ precedence=(
     ('left', 'DIV_OP'),
     ('left', 'SUB_OP'),
     ('right', 'UMINUS'),
-    ('right', 'UPLUS')
 )
 yacc.yacc(outputdir='generated')
 
 def parse(program):
     return yacc.parse(program)
 
+def makeTree(filename, result):
+    import os
+    graph = result.makegraphicaltree()
+    name = os.path.splitext(filename)[0]+'-ast.pdf'
+    graph.write_pdf(name)
+    print ("wrote ast to %s"%name)
+
 if __name__ == "__main__":
     import sys
     prog = open(sys.argv[1]).read()
     result = parse(prog)
     print(result)
-    import os
-    graph = result.makegraphicaltree()
-    name = os.path.splitext(sys.argv[1])[0]+'-ast.pdf'
-    graph.write_pdf(name)
-    print ("wrote ast to %s"%name)
+    makeTree(sys.argv[1],result)
