@@ -70,11 +70,11 @@ def p_structure(p):
         p[0] = AST.StructNode([p[1], p[2]])
 
 def p_for(p):
-    """ forloop : FOR '(' initialization '-' comparison '-' expression ')'
-        | FORNEG '(' initialization '-' NUMBER ')'
-        | FORNEG '(' initialization '-' IDENTIFIER ')'
-        | FORPOS '(' initialization '-' NUMBER ')'
-        | FORPOS '(' initialization '-' IDENTIFIER ')' """
+    """ forloop : FOR '(' initialization_num '-' comparison '-' expression ')'
+        | FORNEG '(' initialization_num '-' NUMBER ')'
+        | FORNEG '(' initialization_num '-' IDENTIFIER ')'
+        | FORPOS '(' initialization_num '-' NUMBER ')'
+        | FORPOS '(' initialization_num '-' IDENTIFIER ')' """
     try:
         p[0] = AST.ForNode([p[3], p[5],p[7]])
     except:
