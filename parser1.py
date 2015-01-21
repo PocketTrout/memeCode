@@ -91,7 +91,6 @@ def p_for(p):
             p[0].type = 'forpos'
             compOp = 'LESSER_OR_EQUALS_OP'
             incrOp = 'INCR_OP'
-        print (AST.ComparisonTokenNode(compOp))
         compNode = AST.ComparisonNode([init, AST.ComparisonTokenNode(compOp), AST.TokenNode(p[5])])
         expNode = AST.IncrNode([AST.TokenNode(incrOp), init])
         p[0] = AST.ForNode([p[3],compNode, expNode])
@@ -115,7 +114,6 @@ def p_comparison_operator(p):
 
 def p_comparison(p):
     """ comparison : expression comparison_operator expression """
-    print(AST.ComparisonTokenNode(p[2]))
     p[0] = AST.ComparisonNode([p[1], AST.ComparisonTokenNode(p[2]), p[3]])
 
 def p_initialization(p):
